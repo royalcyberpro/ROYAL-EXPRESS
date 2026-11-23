@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#101d3b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ROYAL EXPRESS | Online Shopping & Multi-Vendor Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royalBlue: '#1E3A8A',
+                        mintGreen: '#10B981',
+                        goldAmber: '#F59E0B',
+                        obsidianDark: '#070D1F',
+                        midnightCard: '#0F1B38',
+                        midnightRaised: '#16264D',
+                        cyanPulse: '#38BDF8',
+                        slateMist: '#CBD5E1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pageFadeUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.35); }
+            50% { box-shadow: 0 0 22px 4px rgba(245, 158, 11, 0.25); }
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes barSweep {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .anim-page {
+            animation: pageFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .anim-card {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+        .anim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 34px -12px rgba(2, 6, 23, 0.75);
+        }
+        .anim-btn {
+            transition: transform 0.18s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+        .anim-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06);
+        }
+        .anim-btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+        .anim-float {
+            animation: floatSlow 3.6s ease-in-out infinite;
+        }
+        .anim-glow {
+            animation: pulseGlow 2.8s infinite;
+        }
+        .anim-gradient-bar {
+            background-size: 200% 200%;
+            animation: barSweep 7s ease infinite;
+        }
+        input, select, textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+    
+        /* ROYAL EXPRESS motion system */
+        @keyframes royalReveal{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes royalShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        body{scroll-behavior:smooth}
+        main,section,header,footer{animation:royalReveal .65s ease both}
+        button,a,[role="button"]{transition:transform .22s ease,filter .22s ease,box-shadow .22s ease}
+        button:hover,a:hover,[role="button"]:hover{filter:brightness(1.08)}
+        button:active,a:active{transform:scale(.975)}
+        img,video{transition:transform .35s ease,filter .35s ease}
+        .anim-card:hover img{transform:scale(1.035)}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+    </style>
+
+<style id="royal-mobile-responsive">
+
+/* ROYAL EXPRESS mobile-first usability layer */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{width:100%;max-width:100%;overflow-x:hidden;margin:0;min-height:100vh}
+img,video,canvas,svg{max-width:100%;height:auto}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+input,select,textarea{max-width:100%;min-width:0}
+:focus-visible{outline:3px solid rgba(245,158,11,.75);outline-offset:2px}
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+ body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ main{width:100%;max-width:100%;padding-left:16px!important;padding-right:16px!important;padding-top:24px!important;padding-bottom:28px!important}
+ nav{max-width:100%;}
+ nav>div{max-width:100%;flex-wrap:wrap;gap:10px!important;padding-left:14px!important;padding-right:14px!important}
+ nav a{white-space:normal}
+ nav .flex.items-center{gap:12px!important;flex-wrap:wrap}
+ nav .flex-1.max-w-2xl{order:3;flex:1 0 100%;max-width:100%}
+ nav form{width:100%;max-width:100%}
+ nav input[type=search],nav input[type=text]{min-width:0;width:100%}
+ nav .space-x-6>*+*,nav .space-x-5>*+*,nav .space-x-4>*+*{margin-left:0!important}
+ nav .flex.items-center.space-x-6,nav .flex.items-center.space-x-5{width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding:4px 0 7px;scrollbar-width:thin}
+ nav .flex.items-center.space-x-6>a,nav .flex.items-center.space-x-5>a{flex:0 0 auto}
+ body>div.bg-gradient-to-r,body>div.bg-royalBlue{padding-left:14px!important;padding-right:14px!important;gap:8px;flex-wrap:wrap;font-size:11px!important}
+ h1{font-size:clamp(1.45rem,6vw,2rem)!important;line-height:1.2!important}
+ h2{line-height:1.25!important}
+ .text-4xl{font-size:1.9rem!important}.text-3xl{font-size:1.55rem!important}.text-2xl{font-size:1.3rem!important}
+ .p-10{padding:1.25rem!important}.p-8{padding:1.1rem!important}.p-7{padding:1rem!important}.p-6{padding:1rem!important}
+ .px-8,.px-7,.px-6{padding-left:1rem!important;padding-right:1rem!important}
+ .py-12,.py-10{padding-top:1.5rem!important;padding-bottom:1.5rem!important}
+ .gap-10{gap:1.25rem!important}.gap-8{gap:1rem!important}.gap-6{gap:.9rem!important}
+ .rounded-2xl{border-radius:1rem!important}
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;min-height:46px}
+ textarea{min-height:110px}
+ button,.btn,a[role=button]{min-height:42px}
+ .overflow-x-auto{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ table{min-width:620px}
+ .modal,.fixed.inset-0{padding:12px!important;overflow-y:auto}
+ .modal>div,.fixed.inset-0>div{max-width:100%;max-height:calc(100dvh - 24px);overflow-y:auto}
+ #productGrid,#catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ #productGrid>*,#catalogGrid>*{min-width:0}
+ #productGrid img,#catalogGrid img{width:100%;object-fit:cover}
+ .mobile-bottom-nav{display:flex;position:fixed;z-index:1000;left:0;right:0;bottom:0;min-height:64px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(10,18,38,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,.35);justify-content:space-around;align-items:center;gap:4px;box-shadow:0 -8px 24px rgba(0,0,0,.22)}
+ .mobile-bottom-nav a{display:flex;flex:1;min-width:0;min-height:48px;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#cbd5e1;text-decoration:none;font-size:10px;font-weight:700;border-radius:12px;padding:4px 2px}
+ .mobile-bottom-nav a i{font-size:18px}
+ .mobile-bottom-nav a.active{color:#fbbf24;background:rgba(245,158,11,.10)}
+ .mobile-bottom-nav a:active{transform:scale(.96)}
+ footer{padding-bottom:82px!important}
+}
+@media(max-width:420px){
+ body{font-size:14px}
+ main{padding-left:12px!important;padding-right:12px!important}
+ #productGrid,#catalogGrid{gap:9px!important}
+ #productGrid .text-xl,#catalogGrid .text-xl{font-size:1rem!important}
+ #productGrid .text-2xl,#catalogGrid .text-2xl{font-size:1.1rem!important}
+ .mobile-bottom-nav a{font-size:9px}
+ .mobile-bottom-nav a i{font-size:17px}
+ .flex.gap-4{gap:9px!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+</style>
+    <link rel="stylesheet" href="royal-mobile-pro.css">
+</head>
+<body class="bg-gradient-to-br from-obsidianDark via-midnightCard to-slate-950 text-slate-100 font-sans min-h-screen flex flex-col anim-page">
+
+    <div class="bg-gradient-to-r from-royalBlue via-blue-900 to-indigo-950 anim-gradient-bar text-slate-100 text-xs py-2.5 px-6 flex justify-between items-center shadow-md border-b border-blue-800/60">
+        <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-truck-fast text-goldAmber animate-bounce"></i>
+            <span>Express Delivery Across Ghana | Helpline: +233538287760 / +233538747584</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="contact.html" class="hover:text-goldAmber transition flex items-center font-semibold"><i class="fa-solid fa-headset mr-1"></i> Support Hub</a>
+        </div>
+    </div>
+
+    <nav class="bg-midnightCard/95 backdrop-blur-md shadow-lg sticky top-0 z-40 border-b border-blue-900/70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center space-x-2 shrink-0 group">
+                <div class="bg-gradient-to-r from-royalBlue to-blue-800 text-white p-2.5 rounded-xl font-black text-2xl tracking-wider shadow-lg border border-goldAmber/30 group-hover:scale-105 transition transform">
+                    ROYAL<span class="text-goldAmber">EXPRESS</span>
+                </div>
+            </a>
+
+            <div class="flex-1 max-w-2xl">
+                <form id="searchForm" class="flex items-center shadow-inner rounded-xl overflow-hidden border-2 border-blue-800/80 focus-within:border-goldAmber transition bg-obsidianDark">
+                    <input type="text" id="searchInput" placeholder="Search electronics, fashion, gaming, cameras..." 
+                        class="w-full pl-4 pr-4 py-2.5 outline-none text-sm bg-obsidianDark text-slate-100 placeholder-slate-400">
+                    <button type="submit" class="bg-royalBlue text-white px-6 py-2.5 hover:bg-blue-800 transition font-bold text-sm flex items-center anim-btn">
+                        <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Search
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex items-center space-x-5">
+                <a href="products.html" class="text-slateMist hover:text-goldAmber font-semibold text-sm hidden md:inline transition">Catalog</a>
+                <a href="reseller.html" class="text-slateMist hover:text-mintGreen font-semibold text-sm hidden md:inline flex items-center transition">
+                    <i class="fa-solid fa-store mr-1.5 text-mintGreen"></i> Reseller Hub
+                </a>
+                <a href="contact.html" class="text-slateMist hover:text-cyanPulse font-semibold text-sm hidden lg:inline transition">Contact</a>
+                <a href="cart.html" class="relative text-slateMist hover:text-goldAmber flex items-center p-2 rounded-xl hover:bg-midnightRaised transition">
+                    <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                    <span class="cart-count-badge absolute -top-1 -right-1 bg-mintGreen text-slate-950 text-xs font-black w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                </a>
+                <div id="userAccountMenu">
+                    <a href="login.html" class="bg-gradient-to-r from-mintGreen to-emerald-600 text-slate-950 text-sm font-extrabold px-5 py-2.5 rounded-xl shadow-md transition flex items-center anim-btn">
+                        <i class="fa-solid fa-user mr-2"></i> Sign In / Register
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-royalBlue via-midnightCard to-obsidianDark anim-gradient-bar text-white py-16 px-6 relative overflow-hidden shadow-2xl border-b border-blue-900/60">
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:18px_18px]"></div>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+            <div>
+                <span class="bg-goldAmber/20 text-goldAmber border border-goldAmber/40 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest inline-flex items-center anim-glow">
+                    <i class="fa-solid fa-bolt mr-1.5"></i> Ghana's Next-Gen Digital Marketplace
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-black mt-4 leading-tight tracking-tight text-white">
+                    Discover Great Deals on Everyday Essentials
+                </h1>
+                <p class="mt-4 text-slateMist text-base leading-relaxed font-medium">
+                    Find quality products, compare your favourites, and enjoy a simple, secure shopping experience with ROYAL EXPRESS.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="products.html" class="bg-goldAmber text-slate-950 px-7 py-3.5 rounded-xl font-black shadow-xl flex items-center anim-btn">
+                        Explore Catalog <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="reseller.html" class="bg-mintGreen text-slate-950 px-7 py-3.5 rounded-xl font-black shadow-xl flex items-center anim-btn">
+                        Start Selling Today
+                    </a>
+                </div>
+            </div>
+            <div id="homepageHeroVisual" class="flex justify-center items-center"></div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 pt-5 w-full"><div class="flex justify-end items-center gap-2 text-xs text-slate-300"><label for="siteLanguage">Language</label><select id="siteLanguage" onchange="changeSiteLanguage(this.value)" class="bg-midnightCard border border-blue-800 rounded-lg p-2 text-white"><option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="pt">Português</option><option value="tw">Twi</option></select></div></section>
+    <div id="homepageAd" class="hidden max-w-7xl mx-auto px-4 pt-4"></div>
+    <section id="homepageExtraGallery" class="hidden max-w-7xl mx-auto px-4 pt-8"><h2 class="text-2xl font-black text-white mb-5">More to Explore</h2><div id="homepageExtraImages" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div></section>
+    <section class="max-w-7xl mx-auto px-4 py-12 w-full">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-black text-white flex items-center">
+                <i class="fa-solid fa-layer-group text-goldAmber mr-2.5"></i> Marketplace Categories
+            </h2>
+            <a href="products.html" class="text-cyanPulse font-bold text-sm hover:underline flex items-center">View All Categories &rarr;</a>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4" id="categoryContainer"></div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-black text-white flex items-center">
+                <i class="fa-solid fa-fire text-goldAmber mr-2.5 animate-pulse"></i> Trending Marketplace Products
+            </h2>
+            <a href="products.html" class="text-cyanPulse font-bold text-sm hover:underline">Browse All Products &rarr;</a>
+        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChatWidget()" class="bg-royalBlue text-goldAmber w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl border-2 border-goldAmber anim-btn anim-glow">
+            <i class="fa-solid fa-comments"></i>
+        </button>
+        <div id="chatWidgetBox" class="hidden absolute bottom-20 right-0 w-80 sm:w-96 bg-midnightCard text-slate-100 rounded-2xl shadow-2xl border border-blue-800 overflow-hidden flex flex-col h-[480px] anim-page">
+            <div class="bg-royalBlue text-white p-4 flex justify-between items-center shadow border-b border-blue-800">
+                <div>
+                    <h3 class="font-bold text-sm">Royal Live Chat &amp; AI Assistant</h3>
+                    <span class="text-xs text-mintGreen flex items-center mt-0.5"><i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i> Smart AI + Admin Forward</span>
+                </div>
+                <button onclick="toggleChatWidget()" class="text-slate-200 hover:text-goldAmber text-xl font-bold">&times;</button>
+            </div>
+            <div id="chatMessagesArea" class="flex-1 p-4 overflow-y-auto space-y-3 bg-obsidianDark text-xs">
+                <div class="bg-midnightRaised text-slate-100 border border-blue-800/70 p-3.5 rounded-2xl rounded-tl-none shadow-sm leading-relaxed">
+                    <strong class="text-goldAmber">Royal AI Assistant:</strong> Ask simple questions about delivery, Paystack payments, categories, resellers, or password resets. Complex or custom requests are automatically forwarded to the Admin!
+                </div>
+            </div>
+            <div class="p-3 bg-midnightCard border-t border-blue-900 flex gap-2 items-center">
+                <input type="text" id="chatInputBox" placeholder="Ask a question..." class="flex-1 p-2.5 border border-blue-800 rounded-xl text-xs outline-none focus:border-goldAmber bg-obsidianDark text-white placeholder-slate-400">
+                <button onclick="sendChatMessage()" class="bg-mintGreen text-slate-950 px-4 py-2.5 rounded-xl text-xs font-extrabold shadow anim-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-obsidianDark text-slate-200 pt-12 pb-6 mt-16 border-t-4 border-goldAmber">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-2xl font-black text-white mb-3">ROYAL<span class="text-goldAmber">EXPRESS</span></h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Ghana's premier digital multi-vendor marketplace connecting buyers, resellers, and instant Paystack checkout.</p>
+            </div>
+            <div>
+                <h4 class="text-goldAmber font-bold mb-3 text-sm uppercase tracking-wider">Quick Links</h4>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li><a href="index.html" class="hover:text-goldAmber transition">Home</a></li>
+                    <li><a href="products.html" class="hover:text-goldAmber transition">Products Catalog</a></li>
+                    <li><a href="reseller.html" class="hover:text-mintGreen transition">Become a Reseller</a></li>
+                    <li><a href="cart.html" class="hover:text-goldAmber transition">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-goldAmber font-bold mb-3 text-sm uppercase tracking-wider">Customer Care</h4>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li><a href="contact.html" class="hover:text-goldAmber transition">Support Hub</a></li>
+                    <li><a href="login.html" class="hover:text-goldAmber transition">Sign In / Register</a></li>
+                    <li><a href="forgot_password.html" class="hover:text-goldAmber transition">Forgot Password</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-goldAmber font-bold mb-3 text-sm uppercase tracking-wider">Official Contacts</h4>
+                <p class="text-sm text-slate-300 mb-1.5 flex items-center"><i class="fa-solid fa-envelope mr-2 text-goldAmber"></i> isaacbekoeasabre@gmail.com</p>
+                <p class="text-sm text-slate-300 mb-1.5 flex items-center"><i class="fa-solid fa-phone mr-2 text-goldAmber"></i> +233 538 287 760</p>
+                <p class="text-sm text-slate-300 flex items-center"><i class="fa-solid fa-phone mr-2 text-goldAmber"></i> +233 538 747 584</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-blue-950 text-center text-xs text-slate-500">
+            &copy; 2026 ROYAL EXPRESS. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="js/app_state.js"></script>
+    <script>
+        async function renderHomepageAd(){
+            const settings=getRoyalSettings(),el=document.getElementById('homepageAd');
+            const ads=Array.isArray(settings.ads)?settings.ads:(settings.adData?[{data:settings.adData,type:settings.adType||'image',name:'Advertisement'}]:[]);
+            if(!el||!settings.adEnabled||settings.adPaused||!ads.length){if(el){el.classList.add('hidden');el.innerHTML='';}return;}
+            const markup=await Promise.all(ads.map(async(ad,i)=>{const src=ad.mediaKey?await getRoyalMediaUrl(ad.mediaKey):ad.data;if(!src)return '';return `<div class="overflow-hidden rounded-2xl border border-goldAmber/30 bg-black shadow-xl anim-card">${ad.type==='video'?`<video src="${src}" autoplay muted loop playsinline controls preload="metadata" class="w-full h-64 object-contain bg-black" aria-label="Store advertisement ${i+1}"></video>`:`<img src="${src}" alt="Store advertisement ${i+1}" class="w-full h-64 object-contain bg-black">`}</div>`;}));
+            el.classList.remove('hidden');el.innerHTML=`<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">${markup.join('')}</div>`;
+            el.querySelectorAll('video').forEach(v=>{v.muted=true;v.loop=true;v.play().catch(()=>{});});
+        }
+        window.addEventListener('storage',e=>{if(e.key==='ROYAL_EXPRESS_SETTINGS_V1') {renderHomepageAd();renderHomepageHeroImages();renderCategories();renderProducts();}});
+        window.addEventListener('royal:settings-updated',()=>{renderHomepageAd();renderHomepageHeroImages();renderCategories();renderProducts();});
+        function renderHomepageHeroImages(){
+            const settings=getRoyalSettings(),hero=document.getElementById('homepageHeroVisual'),gallery=document.getElementById('homepageExtraGallery'),galleryItems=document.getElementById('homepageExtraImages');if(!hero)return;
+            const imgs=Array.isArray(settings.heroImages)?settings.heroImages:[];
+            const fallback='https://images.unsplash.com/photo-1498049794561-7780e7231661?w=900';
+            const main=imgs[0]?.data||fallback;
+            hero.innerHTML=`<img src="${main}" alt="ROYAL EXPRESS featured shopping products" class="rounded-2xl shadow-2xl border-2 border-goldAmber/40 max-h-96 w-full object-cover anim-float">`;
+            if(imgs.length>1){gallery.classList.remove('hidden');galleryItems.innerHTML=imgs.slice(1).map((x,i)=>`<div class="overflow-hidden rounded-2xl border border-blue-800 bg-midnightCard shadow-xl anim-card"><img src="${x.data}" alt="Shopping showcase ${i+1}" class="w-full h-48 object-cover"><p class="p-3 text-sm font-bold text-white">${x.name||'Featured collection'}</p></div>`).join('');}else{gallery.classList.add('hidden');galleryItems.innerHTML='';}
+        }
+        function changeSiteLanguage(lang){royalChangeLanguage(lang);}
+        document.addEventListener("DOMContentLoaded", () => {
+            renderHomepageAd();
+            renderHomepageHeroImages();
+            renderHeaderUser();
+            renderCategories();
+            renderProducts();
+
+            document.getElementById("searchForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const q = document.getElementById("searchInput").value.trim();
+                if(q) window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+            });
+        });
+
+        function renderHeaderUser() {
+            const user = getAuthUser();
+            const container = document.getElementById("userAccountMenu");
+            if (user) {
+                container.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs font-extrabold bg-royalBlue text-goldAmber border border-goldAmber/40 px-3 py-1.5 rounded-xl uppercase">
+                            ${user.role}
+                        </span>
+                        <span class="text-sm font-bold text-slate-100">${user.name}</span>
+                        <button onclick="logoutUser()" class="text-xs text-rose-400 hover:underline font-bold">Logout</button>
+                    </div>
+                `;
+            }
+        }
+
+        function logoutUser() {
+            saveAuthUser(null);
+            window.location.reload();
+        }
+
+        function renderCategories() {
+            document.getElementById("categoryContainer").innerHTML = getRoyalCategories().map((cat) => `
+                <a href="products.html?category=${encodeURIComponent(cat)}" class="bg-midnightCard p-4 rounded-2xl border border-blue-900/70 shadow-md text-center hover:border-goldAmber group anim-card">
+                    <div class="w-12 h-12 mx-auto bg-obsidianDark text-cyanPulse border border-blue-800/70 rounded-2xl flex items-center justify-center text-xl group-hover:bg-goldAmber group-hover:text-slate-950 transition">
+                        <i class="fa-solid fa-tag"></i>
+                    </div>
+                    <span class="block mt-3 font-bold text-xs sm:text-sm text-slate-100">${cat}</span>
+                </a>
+            `).join('');
+        }
+
+        function renderProducts() {
+            const products = getProducts().slice(0, 8);
+            document.getElementById("productGrid").innerHTML = products.map(p => `
+                <div class="bg-midnightCard border border-blue-900/70 rounded-2xl overflow-hidden shadow-md hover:border-goldAmber/70 flex flex-col justify-between group anim-card">
+                    <div>
+                        <div class="relative h-52 bg-obsidianDark overflow-hidden">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            ${p.discountActive ? `<span class="absolute top-3 left-3 bg-rose-600 text-white text-xs px-2.5 py-1 rounded-lg font-black shadow-lg uppercase">${p.discountName || 'Sale'}</span>` : ''}
+                            
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-cyanPulse font-extrabold uppercase tracking-widest">${p.cat}</span>
+                            <h3 class="font-bold text-white text-base line-clamp-1 mt-1">${p.name}</h3>
+                            <div class="flex items-center mt-2 text-goldAmber text-xs font-bold">
+                                <i class="fa-solid fa-star mr-1"></i>
+                                <span class="text-slate-200">${p.rating}</span>
+                                <span class="ml-2 text-slate-400 font-normal">(${p.stock} in stock)</span>
+                            </div>
+                            ${p.description ? `<p class="mt-2 text-xs text-slate-300 line-clamp-2">${p.description}</p>` : ""}
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-blue-900/60 mt-2 pt-4">
+                        <div>
+                            ${p.discountActive ? `<span class="text-xs text-slate-400 line-through block font-bold">GH₵ ${p.originalPrice.toFixed(2)}</span>` : ''}
+                            <span class="text-xl font-black text-mintGreen">GH₵ ${p.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="quickAddToCart('${p.id}')" class="bg-royalBlue hover:bg-blue-800 text-white px-4 py-2 rounded-xl text-xs font-bold shadow flex items-center anim-btn">
+                            <i class="fa-solid fa-cart-plus mr-1.5"></i> Add
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function quickAddToCart(id) {
+            const products = getProducts();
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            let cart = getCart();
+            const existing = cart.find(item => item.id === id);
+            if (existing) { existing.qty += 1; } else { cart.push({ ...product, qty: 1 }); }
+            saveCart(cart);
+            alert(`${product.name} added to cart!`);
+        }
+
+        function toggleChatWidget() {
+            document.getElementById("chatWidgetBox").classList.toggle("hidden");
+        }
+
+        function generateSmartAiReply(question) {
+            const q = question.toLowerCase();
+            if (q.includes("hello") || q.includes("hi") || q.includes("hey")) {
+                return { answeredByAi: true, text: "Hello! Welcome to Royal Express. Ask me about delivery fees, Paystack payment methods, reseller accounts, or password resets." };
+            }
+            if (q.includes("delivery") || q.includes("shipping") || q.includes("how long")) {
+                const fee=getDeliveryFee(); return { answeredByAi: true, text: `Current delivery fee: GH₵ ${fee.toFixed(2)}. ${fee===0?'Delivery is currently free or closed.':'Delivery is currently enabled.'} Orders are processed after Paystack confirmation.` };
+            }
+            if (q.includes("pay") || q.includes("payment") || q.includes("momo") || q.includes("card") || q.includes("paystack")) {
+                return { answeredByAi: true, text: "We process payments through Paystack supporting MTN Mobile Money, Telecel / AT Money, and Visa / Mastercard." };
+            }
+            if (q.includes("reseller") || q.includes("sell") || q.includes("profit") || q.includes("withdraw")) {
+                return { answeredByAi: true, text: "Register as a Reseller / Seller Partner to add products with images, track profit margins, and withdraw earnings to MoMo or bank accounts." };
+            }
+            if (q.includes("password") || q.includes("forgot") || q.includes("verify") || q.includes("code") || q.includes("account")) {
+                return { answeredByAi: true, text: "Each email can create one account, log in anytime with the right password, reset forgotten passwords on the Forgot Password page, and verify new registrations via email code." };
+            }
+            if (q.includes("category") || q.includes("categories") || q.includes("product")) {
+                return { answeredByAi: true, text: "We offer 10 categories including Electronics, Fashion, Home & Kitchen, Beauty & Care, Sports & Fitness, Automotive, Gaming & Consoles, Cameras & Audio, Watches & Jewelry, and Office & Tech." };
+            }
+            return {
+                answeredByAi: false,
+                text: "That question goes beyond my quick-answer guide, so I have forwarded it directly to the Royal Express Admin inbox for personal assistance!"
+            };
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById("chatInputBox");
+            const text = input.value.trim();
+            if(!text) return;
+            const area = document.getElementById("chatMessagesArea");
+            area.innerHTML += `<div class="bg-midnightRaised text-white p-3 rounded-2xl border border-blue-800/60 text-right shadow-sm"><strong>You:</strong> ${text}</div>`;
+            input.value = "";
+            area.scrollTop = area.scrollHeight;
+
+            setTimeout(() => {
+                const aiResult = generateSmartAiReply(text);
+                area.innerHTML += `<div class="bg-royalBlue/40 border border-cyanPulse/30 text-slate-100 p-3.5 rounded-2xl rounded-tl-none shadow-sm leading-relaxed"><strong class="text-cyanPulse">Royal AI Assistant:</strong> ${aiResult.text}</div>`;
+                area.scrollTop = area.scrollHeight;
+
+                if (!aiResult.answeredByAi) {
+                    const user = getAuthUser();
+                    const newMsg = {
+                        id: `MSG-${Date.now().toString().slice(-5)}`,
+                        name: user ? user.name : "Live Chat Guest",
+                        email: user ? user.email : "guest@royalexpress.com",
+                        body: `[AI Escalated to Admin]: ${text}`,
+                        date: new Date().toLocaleString(),
+                        reply: null
+                    };
+                    let msgs = getMessages();
+                    msgs.unshift(newMsg);
+                    saveMessages(msgs);
+                }
+            }, 600);
+        }
+    </script>
+<script id="royal-mobile-navigation">
+(function(){
+  if (window.matchMedia('(min-width: 769px)').matches || document.querySelector('.mobile-bottom-nav')) return;
+  const links=[
+    ['index.html','fa-house','Home'],
+    ['products.html','fa-store','Shop'],
+    ['cart.html','fa-cart-shopping','Cart'],
+    ['login.html','fa-user','Account'],
+    ['contact.html','fa-headset','Help']
+  ];
+  const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const nav=document.createElement('nav'); nav.className='mobile-bottom-nav'; nav.setAttribute('aria-label','Mobile quick navigation');
+  links.forEach(([href,icon,label])=>{
+    const a=document.createElement('a');a.href=href;
+    if(current===href || (current==='checkout.html'&&href==='cart.html') || (current==='receipt.html'&&href==='cart.html'))a.classList.add('active');
+    const i=document.createElement('i');i.className='fa-solid '+icon;i.setAttribute('aria-hidden','true');
+    const span=document.createElement('span');span.textContent=label;
+    a.append(i,span);nav.append(a);
+  });
+  document.body.append(nav);
+})();
+</script>
+</body>
+</html>

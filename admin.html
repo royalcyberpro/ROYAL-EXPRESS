@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#101d3b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Admin Portal | ROYAL EXPRESS Executive Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royalBlue: '#1E3A8A',
+                        mintGreen: '#10B981',
+                        goldAmber: '#F59E0B',
+                        obsidianDark: '#070D1F',
+                        midnightCard: '#0F1B38',
+                        midnightRaised: '#16264D',
+                        cyanPulse: '#38BDF8',
+                        slateMist: '#CBD5E1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pageFadeUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.35); }
+            50% { box-shadow: 0 0 22px 4px rgba(245, 158, 11, 0.25); }
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes barSweep {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .anim-page {
+            animation: pageFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .anim-card {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+        .anim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 34px -12px rgba(2, 6, 23, 0.75);
+        }
+        .anim-btn {
+            transition: transform 0.18s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+        .anim-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06);
+        }
+        .anim-btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+        .anim-float {
+            animation: floatSlow 3.6s ease-in-out infinite;
+        }
+        .anim-glow {
+            animation: pulseGlow 2.8s infinite;
+        }
+        .anim-gradient-bar {
+            background-size: 200% 200%;
+            animation: barSweep 7s ease infinite;
+        }
+        input, select, textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+    
+        /* ROYAL EXPRESS motion system */
+        @keyframes royalReveal{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes royalShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        body{scroll-behavior:smooth}
+        main,section,header,footer{animation:royalReveal .65s ease both}
+        button,a,[role="button"]{transition:transform .22s ease,filter .22s ease,box-shadow .22s ease}
+        button:hover,a:hover,[role="button"]:hover{filter:brightness(1.08)}
+        button:active,a:active{transform:scale(.975)}
+        img,video{transition:transform .35s ease,filter .35s ease}
+        .anim-card:hover img{transform:scale(1.035)}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+    </style>
+
+<style id="royal-mobile-responsive">
+
+/* ROYAL EXPRESS mobile-first usability layer */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{width:100%;max-width:100%;overflow-x:hidden;margin:0;min-height:100vh}
+img,video,canvas,svg{max-width:100%;height:auto}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+input,select,textarea{max-width:100%;min-width:0}
+:focus-visible{outline:3px solid rgba(245,158,11,.75);outline-offset:2px}
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+ body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ main{width:100%;max-width:100%;padding-left:16px!important;padding-right:16px!important;padding-top:24px!important;padding-bottom:28px!important}
+ nav{max-width:100%;}
+ nav>div{max-width:100%;flex-wrap:wrap;gap:10px!important;padding-left:14px!important;padding-right:14px!important}
+ nav a{white-space:normal}
+ nav .flex.items-center{gap:12px!important;flex-wrap:wrap}
+ nav .flex-1.max-w-2xl{order:3;flex:1 0 100%;max-width:100%}
+ nav form{width:100%;max-width:100%}
+ nav input[type=search],nav input[type=text]{min-width:0;width:100%}
+ nav .space-x-6>*+*,nav .space-x-5>*+*,nav .space-x-4>*+*{margin-left:0!important}
+ nav .flex.items-center.space-x-6,nav .flex.items-center.space-x-5{width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding:4px 0 7px;scrollbar-width:thin}
+ nav .flex.items-center.space-x-6>a,nav .flex.items-center.space-x-5>a{flex:0 0 auto}
+ body>div.bg-gradient-to-r,body>div.bg-royalBlue{padding-left:14px!important;padding-right:14px!important;gap:8px;flex-wrap:wrap;font-size:11px!important}
+ h1{font-size:clamp(1.45rem,6vw,2rem)!important;line-height:1.2!important}
+ h2{line-height:1.25!important}
+ .text-4xl{font-size:1.9rem!important}.text-3xl{font-size:1.55rem!important}.text-2xl{font-size:1.3rem!important}
+ .p-10{padding:1.25rem!important}.p-8{padding:1.1rem!important}.p-7{padding:1rem!important}.p-6{padding:1rem!important}
+ .px-8,.px-7,.px-6{padding-left:1rem!important;padding-right:1rem!important}
+ .py-12,.py-10{padding-top:1.5rem!important;padding-bottom:1.5rem!important}
+ .gap-10{gap:1.25rem!important}.gap-8{gap:1rem!important}.gap-6{gap:.9rem!important}
+ .rounded-2xl{border-radius:1rem!important}
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;min-height:46px}
+ textarea{min-height:110px}
+ button,.btn,a[role=button]{min-height:42px}
+ .overflow-x-auto{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ table{min-width:620px}
+ .modal,.fixed.inset-0{padding:12px!important;overflow-y:auto}
+ .modal>div,.fixed.inset-0>div{max-width:100%;max-height:calc(100dvh - 24px);overflow-y:auto}
+ #productGrid,#catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ #productGrid>*,#catalogGrid>*{min-width:0}
+ #productGrid img,#catalogGrid img{width:100%;object-fit:cover}
+ .mobile-bottom-nav{display:flex;position:fixed;z-index:1000;left:0;right:0;bottom:0;min-height:64px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(10,18,38,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,.35);justify-content:space-around;align-items:center;gap:4px;box-shadow:0 -8px 24px rgba(0,0,0,.22)}
+ .mobile-bottom-nav a{display:flex;flex:1;min-width:0;min-height:48px;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#cbd5e1;text-decoration:none;font-size:10px;font-weight:700;border-radius:12px;padding:4px 2px}
+ .mobile-bottom-nav a i{font-size:18px}
+ .mobile-bottom-nav a.active{color:#fbbf24;background:rgba(245,158,11,.10)}
+ .mobile-bottom-nav a:active{transform:scale(.96)}
+ footer{padding-bottom:82px!important}
+}
+@media(max-width:420px){
+ body{font-size:14px}
+ main{padding-left:12px!important;padding-right:12px!important}
+ #productGrid,#catalogGrid{gap:9px!important}
+ #productGrid .text-xl,#catalogGrid .text-xl{font-size:1rem!important}
+ #productGrid .text-2xl,#catalogGrid .text-2xl{font-size:1.1rem!important}
+ .mobile-bottom-nav a{font-size:9px}
+ .mobile-bottom-nav a i{font-size:17px}
+ .flex.gap-4{gap:9px!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+</style>
+    <link rel="stylesheet" href="royal-mobile-pro.css">
+</head>
+<body class="bg-gradient-to-br from-obsidianDark via-midnightCard to-slate-950 min-h-screen text-slate-100 anim-page">
+
+    <div id="adminLoginScreen" class="min-h-screen flex items-center justify-center p-4 bg-obsidianDark">
+        <div class="bg-midnightCard max-w-md w-full rounded-2xl shadow-2xl overflow-hidden border border-blue-800/80 anim-card">
+            <div class="bg-royalBlue p-6 text-center text-white border-b border-blue-800">
+                <div class="inline-block bg-obsidianDark/70 border border-goldAmber/40 px-4 py-2 rounded-xl text-2xl font-black tracking-wider text-white anim-float">
+                    ROYAL<span class="text-goldAmber">EXPRESS</span>
+                </div>
+                <p class="text-xs text-goldAmber font-bold mt-2">Executive Admin Secure Portal</p>
+            </div>
+            
+            <form id="adminLoginForm" class="p-7 space-y-4">
+                <div id="securityAlertBox" class="hidden p-3 bg-rose-950/80 border border-rose-500/50 text-rose-200 text-xs rounded-lg font-bold"></div>
+
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Admin Email Address</label>
+                    <input type="email" id="adminEmailInput" required placeholder="Enter Admin Email" 
+                        class="w-full p-3.5 border-2 border-blue-800 rounded-xl text-sm font-bold text-white bg-obsidianDark focus:border-goldAmber">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Admin Phone Contact</label>
+                    <input type="text" id="adminPhoneInput" required placeholder="Enter Admin Phone Number" 
+                        class="w-full p-3.5 border-2 border-blue-800 rounded-xl text-sm font-bold text-white bg-obsidianDark focus:border-goldAmber">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Master Access Password</label>
+                    <input type="password" id="adminPassInput" required placeholder="Enter Admin Password" 
+                        class="w-full p-3.5 border-2 border-blue-800 rounded-xl text-sm font-bold text-white bg-obsidianDark focus:border-goldAmber">
+                </div>
+
+                <button type="submit" class="w-full bg-goldAmber text-slate-950 font-extrabold py-4 rounded-xl shadow-lg anim-btn">
+                    <i class="fa-solid fa-key mr-2"></i> Authenticate Admin Access
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="adminWorkspace" class="hidden flex flex-col min-h-screen">
+        <header class="bg-royalBlue text-white shadow-lg py-3.5 px-6 flex justify-between items-center border-b border-blue-800">
+            <div class="flex items-center space-x-3">
+                <span class="bg-goldAmber text-slate-950 text-xs px-3 py-1 rounded-full font-black uppercase">Executive Access</span>
+                <span class="font-bold text-sm">Welcome, Admin</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span id="currentAdminEmailDisplay" class="text-xs text-blue-200"></span>
+                <button onclick="clearAllRecordsAction()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs px-3.5 py-2 rounded-lg font-extrabold shadow anim-btn">
+                    <i class="fa-solid fa-broom mr-1"></i> Clear All Records
+                </button>
+                <button onclick="logoutAdmin()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-4 py-2 rounded-lg font-bold shadow anim-btn">
+                    <i class="fa-solid fa-power-off mr-1"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <nav class="bg-obsidianDark text-white border-b border-blue-900 px-6 flex space-x-3 overflow-x-auto text-sm font-bold">
+            <button onclick="switchAdminTab('overview')" id="tabBtn-overview" class="py-3.5 px-4 border-b-4 border-goldAmber text-goldAmber whitespace-nowrap">Dashboard &amp; Analytics</button>
+            <button onclick="switchAdminTab('resellerLogs')" id="tabBtn-resellerLogs" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Reseller Logs &amp; Withdrawals</button>
+            <button onclick="switchAdminTab('users')" id="tabBtn-users" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">User Registry</button>
+            <button onclick="switchAdminTab('products')" id="tabBtn-products" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Catalog &amp; Discounts</button>
+            <button onclick="switchAdminTab('orders')" id="tabBtn-orders" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Order Confirmations</button>
+            <button onclick="switchAdminTab('payments')" id="tabBtn-payments" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Payment Records</button>
+            <button onclick="switchAdminTab('messages')" id="tabBtn-messages" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Live Inbox &amp; AI Chat</button>
+            <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Store Settings &amp; Ads</button>
+            <button onclick="switchAdminTab('security')" id="tabBtn-security" class="py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap">Security &amp; Credentials</button>
+        </nav>
+
+        <main class="flex-grow p-6 max-w-7xl mx-auto w-full">
+            <section id="sec-overview" class="space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-extrabold text-white text-lg">Dashboard Overview</h3>
+                    <button onclick="clearAllRecordsAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-4 py-2 rounded-xl font-bold shadow anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear All Records
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-5">
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Users</span>
+                        <h3 id="statTotalUsers" class="text-3xl font-black text-cyanPulse mt-1">0</h3>
+                    </div>
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Products</span>
+                        <h3 id="statTotalPrds" class="text-3xl font-black text-white mt-1">0</h3>
+                    </div>
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Reseller Logs</span>
+                        <h3 id="statTotalResellerLogs" class="text-3xl font-black text-goldAmber mt-1">0</h3>
+                    </div>
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Orders</span>
+                        <h3 id="statTotalOrders" class="text-3xl font-black text-mintGreen mt-1">0</h3>
+                    </div>
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Payments</span>
+                        <h3 id="statTotalPayments" class="text-3xl font-black text-goldAmber mt-1">0</h3>
+                    </div>
+                    <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                        <span class="text-xs text-slate-400 font-bold uppercase">Alerts</span>
+                        <h3 id="statTotalAlerts" class="text-3xl font-black text-rose-400 mt-1">0</h3>
+                    </div>
+                </div>
+
+                <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm space-y-4 anim-card">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <h3 class="font-extrabold text-white text-lg flex items-center">
+                            <i class="fa-solid fa-chart-line mr-2 text-cyanPulse"></i> Daily, Weekly, Monthly &amp; Yearly Transactions &amp; Orders Analysis
+                        </h3>
+                        <span class="text-xs font-bold text-mintGreen bg-emerald-950 border border-mintGreen/40 px-3 py-1 rounded-full">Live Period Breakdown</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-xl bg-obsidianDark border border-blue-900/70">
+                            <span class="text-xs font-black uppercase text-cyanPulse">Daily (Today)</span>
+                            <div id="dailyTransactionsAmount" class="text-xl font-black text-mintGreen mt-1">GH₵ 0.00</div>
+                            <div id="dailyOrdersCount" class="text-xs font-bold text-slate-300 mt-0.5">0 Orders</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-obsidianDark border border-blue-900/70">
+                            <span class="text-xs font-black uppercase text-cyanPulse">Weekly (Last 7 Days)</span>
+                            <div id="weeklyTransactionsAmount" class="text-xl font-black text-mintGreen mt-1">GH₵ 0.00</div>
+                            <div id="weeklyOrdersCount" class="text-xs font-bold text-slate-300 mt-0.5">0 Orders</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-obsidianDark border border-blue-900/70">
+                            <span class="text-xs font-black uppercase text-cyanPulse">Monthly (Current Month)</span>
+                            <div id="monthlyTransactionsAmount" class="text-xl font-black text-mintGreen mt-1">GH₵ 0.00</div>
+                            <div id="monthlyOrdersCount" class="text-xs font-bold text-slate-300 mt-0.5">0 Orders</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-obsidianDark border border-blue-900/70">
+                            <span class="text-xs font-black uppercase text-cyanPulse">Yearly (Current Year)</span>
+                            <div id="yearlyTransactionsAmount" class="text-xl font-black text-mintGreen mt-1">GH₵ 0.00</div>
+                            <div id="yearlyOrdersCount" class="text-xs font-bold text-slate-300 mt-0.5">0 Orders</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm space-y-4 anim-card">
+                    <h3 class="font-extrabold text-white text-lg flex items-center">
+                        <i class="fa-solid fa-credit-card mr-2 text-goldAmber"></i> Payment Methods Used on Orders
+                    </h3>
+                    <div id="paymentMethodBreakdown" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
+                </div>
+
+                <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm anim-card">
+                    <h3 class="font-extrabold text-white text-lg mb-4">Paystack Live Integration Status</h3>
+                    <div class="p-4 bg-emerald-950/60 border border-mintGreen/40 rounded-xl text-sm text-emerald-200">
+                        <span class="font-bold block">Paystack Live Key Integrated:</span>
+                        <span class="font-mono text-xs font-bold text-mintGreen">pk_live_7f985c26dcf2229ff2c3cfe5e803bdcb2cec4936</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-resellerLogs" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg flex items-center">
+                        <i class="fa-solid fa-store mr-2 text-goldAmber"></i> Reseller Product Addition Logs
+                    </h3>
+                    <button onclick="clearResellerLogsAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear Logs
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Log ID</th>
+                                    <th class="p-4">Reseller Partner</th>
+                                    <th class="p-4">Product Name</th>
+                                    <th class="p-4">Category</th>
+                                    <th class="p-4">Base Price</th>
+                                    <th class="p-4">Stock</th>
+                                    <th class="p-4">Date Added</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminResellerLogsTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg flex items-center">
+                        <i class="fa-solid fa-money-bill-transfer mr-2 text-mintGreen"></i> Reseller Profit Withdrawals
+                    </h3>
+                    <button onclick="clearWithdrawalsAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear Withdrawals
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Withdrawal ID</th>
+                                    <th class="p-4">Reseller</th>
+                                    <th class="p-4">Amount</th>
+                                    <th class="p-4">Payment Account</th>
+                                    <th class="p-4">Account Info</th>
+                                    <th class="p-4">Date</th>
+                                    <th class="p-4">Status</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminWithdrawalsTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-users" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg">Customer &amp; Reseller Account Records Registry</h3>
+                    <button onclick="clearUsersAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear Users
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Name</th>
+                                    <th class="p-4">Email</th>
+                                    <th class="p-4">Account Role</th>
+                                    <th class="p-4">Registration Date</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUsersTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-products" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center bg-midnightCard p-4 rounded-xl border border-blue-900/70 shadow-sm">
+                    <h3 class="font-bold text-white text-lg">Catalog &amp; Timed Discount Management</h3>
+                    <button onclick="document.getElementById('adminAddPrdModal').classList.remove('hidden')" class="bg-mintGreen text-slate-950 font-extrabold text-xs px-4 py-2.5 rounded-lg shadow anim-btn">
+                        <i class="fa-solid fa-plus-circle mr-1"></i> Add Product
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Product Name</th>
+                                    <th class="p-4">Price (GH₵)</th>
+                                    <th class="p-4">Apply Timed Discount</th>
+                                    <th class="p-4">Reseller Markup</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminProductsTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-orders" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg">Customer Order Confirmations &amp; Payment Methods</h3>
+                    <button onclick="clearOrdersAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear Orders
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Order ID</th>
+                                    <th class="p-4">Customer Details</th>
+                                    <th class="p-4">Total Paid</th>
+                                    <th class="p-4">Payment Method Used</th>
+                                    <th class="p-4">Status</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminOrdersTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-payments" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg">Payment Records Ledger</h3>
+                    <button onclick="clearPaymentsAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear Payments
+                    </button>
+                </div>
+                <div class="bg-midnightCard rounded-2xl border border-blue-900/70 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-obsidianDark text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="p-4">Payment ID</th>
+                                    <th class="p-4">Order ID</th>
+                                    <th class="p-4">Customer Name</th>
+                                    <th class="p-4">Amount</th>
+                                    <th class="p-4">Payment Method</th>
+                                    <th class="p-4">Destination Account</th>
+                                    <th class="p-4">Date</th>
+                                    <th class="p-4 text-right">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPaymentsTable" class="divide-y divide-blue-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-messages" class="hidden space-y-6 anim-page">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-bold text-white text-lg">Live Customer Inbox &amp; AI Escalated Inquiries</h3>
+                    <button onclick="clearMessagesAction()" class="bg-rose-600/90 hover:bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                        <i class="fa-solid fa-trash mr-1"></i> Clear All Messages
+                    </button>
+                </div>
+                <div id="adminMessagesContainer" class="space-y-4"></div>
+            </section>
+
+            <section id="sec-settings" class="hidden space-y-6 anim-page">
+                <div class="bg-midnightCard border border-blue-900 rounded-2xl p-6 space-y-4">
+                    <h3 class="text-white text-xl font-black">Store controls</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <label class="text-sm text-slate-200">Delivery fee (GH₵)<input id="settingDeliveryFee" type="number" min="0" step="0.01" class="block w-full mt-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white"></label>
+                        <label class="text-sm text-slate-200">Delivery status<select id="settingDeliveryEnabled" class="block w-full mt-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white"><option value="true">Open / Charge delivery</option><option value="false">Closed / Free delivery</option></select></label>
+                        <label class="text-sm text-slate-200">Discount name<input id="settingDiscountName" class="block w-full mt-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white" placeholder="e.g. Christmas Special"></label>
+                        <label class="text-sm text-slate-200">Discount percentage<input id="settingDiscountPercent" type="number" min="0" max="90" class="block w-full mt-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white"></label>
+                        <label class="text-sm text-slate-200">Discount status<select id="settingDiscountEnabled" class="block w-full mt-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white"><option value="true">Open / Active</option><option value="false">Closed / Inactive</option></select></label>
+                    </div>
+                    <div><label class="text-sm text-slate-200">Add your own category</label><div class="flex gap-2 mt-1"><input id="newCategoryName" class="flex-1 p-3 rounded-lg bg-obsidianDark border border-blue-800 text-white" placeholder="Category name"><button type="button" onclick="addAdminCategory()" class="bg-mintGreen text-slate-950 px-4 rounded-lg font-bold">+ Add category</button></div><div id="adminCategoryList" class="flex flex-wrap gap-2 mt-3"></div></div>
+                    <button onclick="saveStoreSettings()" class="bg-royalBlue text-white px-6 py-3 rounded-lg font-bold">Save Store Settings</button>
+                </div>
+                <div class="bg-midnightCard border border-blue-900 rounded-2xl p-6 space-y-3">
+                    <h3 class="text-white text-xl font-black">Homepage video / advertisement</h3><p class="text-slate-300 text-sm">Upload an image or video from this device. Nothing appears on the public website when no ad is uploaded.</p>
+                    <input id="adminAdFile" type="file" accept="image/*,video/*" multiple class="block w-full p-3 bg-obsidianDark text-white rounded-lg border border-blue-800">
+                    <div class="flex flex-wrap gap-2"><button onclick="saveAdminAd()" class="bg-mintGreen text-slate-950 px-5 py-3 rounded-lg font-bold">Upload Selected Ads</button><button onclick="toggleAdminAdsPause()" id="adminAdsPauseBtn" class="bg-amber-500 text-slate-950 px-5 py-3 rounded-lg font-bold">Pause Ads</button><button onclick="removeAdminAd()" class="bg-rose-600 text-white px-5 py-3 rounded-lg font-bold">Remove All Ads</button></div><p class="text-xs text-slate-400">All uploaded ads and videos display together in a responsive grid. Videos autoplay muted and loop. Browser-only storage is limited; use optimized files.</p><div id="adminAdPreview" class="max-w-3xl grid md:grid-cols-2 gap-3"></div>
+                </div>
+                <div class="bg-midnightCard border border-blue-900 rounded-2xl p-6 space-y-4">
+                    <h3 class="text-white text-xl font-black">Homepage images &amp; extra showcase gallery</h3>
+                    <p class="text-slate-300 text-sm">Upload several images to replace the main homepage picture and add more attractive product images to the extra showcase gallery. You can remove any image whenever you want.</p>
+                    <label class="block text-sm text-slate-200">Add or replace homepage showcase images<input id="adminHeroImages" type="file" accept="image/*" multiple class="block w-full mt-2 p-3 bg-obsidianDark text-white rounded-lg border border-blue-800"></label>
+                    <div class="flex flex-wrap gap-2"><button type="button" onclick="saveHeroImages()" class="bg-mintGreen text-slate-950 px-5 py-3 rounded-lg font-bold">+ Add Homepage Images</button><button type="button" onclick="clearHeroImages()" class="bg-rose-600 text-white px-5 py-3 rounded-lg font-bold">Remove All Homepage Images</button></div>
+                    <div id="adminHeroImagePreview" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                    <p class="text-slate-400 text-xs">Images are saved in this browser. For sharing changes across visitors and devices, connect cloud media storage.</p>
+                </div>
+                <div class="bg-amber-950/40 border border-amber-700/60 rounded-xl p-4 text-amber-100 text-sm"><b>Email verification note:</b> this project is currently a browser-only static site. A browser cannot securely send email directly. Reliable inbox delivery needs a deployed server/API plus a verified sender and SMTP/email-provider credentials. The existing FormSubmit relay cannot guarantee delivery; setup requirements are documented in README.</div>
+            </section>
+            <section id="sec-security" class="hidden space-y-6 anim-page">
+                <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm max-w-xl">
+                    <h3 class="font-bold text-goldAmber text-lg mb-4">Change Admin Credentials &amp; Security Settings</h3>
+                    <form id="updateCredsForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-black text-slateMist uppercase mb-1">Admin Email</label>
+                            <input type="email" id="newAdminEmail" required class="w-full p-3 border border-blue-800 rounded-xl text-sm font-semibold bg-obsidianDark text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slateMist uppercase mb-1">Admin Phone Number</label>
+                            <input type="text" id="newAdminPhone" required class="w-full p-3 border border-blue-800 rounded-xl text-sm font-semibold bg-obsidianDark text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slateMist uppercase mb-1">New Master Password</label>
+                            <input type="password" id="newAdminPass" required placeholder="New password" class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                        </div>
+                        <button type="submit" class="bg-royalBlue hover:bg-blue-800 text-white px-6 py-3 rounded-xl text-xs font-bold anim-btn">
+                            Save Updated Credentials
+                        </button>
+                    </form>
+                </div>
+
+                <div class="bg-rose-950/50 border border-rose-500/40 p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-rose-300 text-lg">Security Intrusion Logs</h3>
+                        <button onclick="clearAlertsAction()" class="bg-rose-600 text-white text-xs px-3.5 py-2 rounded-xl font-bold anim-btn">
+                            <i class="fa-solid fa-trash mr-1"></i> Clear Alerts
+                        </button>
+                    </div>
+                    <div id="adminAlertsContainer" class="space-y-3 mt-4"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="adminAddPrdModal" class="hidden fixed inset-0 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-midnightCard border border-blue-800 rounded-2xl max-w-lg w-full p-7 shadow-2xl relative anim-page">
+            <button onclick="document.getElementById('adminAddPrdModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            <h3 class="text-xl font-black text-goldAmber mb-5">Add Official Product with Image</h3>
+            <form id="adminAddPrdForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Title</label>
+                    <input type="text" id="adminPrdName" required class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-black text-slateMist uppercase mb-1">Category</label>
+                        <select id="adminPrdCat" class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                            <option value="Electronics">Electronics</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Home & Kitchen">Home &amp; Kitchen</option>
+                            <option value="Beauty & Care">Beauty &amp; Care</option>
+                            <option value="Sports & Fitness">Sports &amp; Fitness</option>
+                            <option value="Automotive">Automotive</option>
+                            <option value="Gaming & Consoles">Gaming &amp; Consoles</option>
+                            <option value="Cameras & Audio">Cameras &amp; Audio</option>
+                            <option value="Watches & Jewelry">Watches &amp; Jewelry</option>
+                            <option value="Office & Tech">Office &amp; Tech</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slateMist uppercase mb-1">Price (GH₵)</label>
+                        <input type="number" id="adminPrdPrice" required class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Product Description</label><textarea id="adminPrdDescription" rows="3" required class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white" placeholder="Describe product features and condition"></textarea>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Stock</label>
+                    <input type="number" id="adminPrdStock" required class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                </div>
+                <div>
+                    <label class="block text-xs font-black text-slateMist uppercase mb-1">Product Image (Upload File or Enter URL)</label>
+                    <div class="space-y-2">
+                        <input type="file" id="adminPrdImageFile" accept="image/*" class="w-full p-2 border border-blue-800 rounded-xl text-xs bg-obsidianDark text-slate-200">
+                        <input type="url" id="adminPrdImg" placeholder="Or enter image URL (https://...)" class="w-full p-3 border border-blue-800 rounded-xl text-sm bg-obsidianDark text-white">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-royalBlue hover:bg-blue-800 text-white py-3.5 rounded-xl font-bold anim-btn">
+                    Publish Official Item
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app_state.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadStoreSettingsUI(); refreshCategorySelects();
+            document.getElementById("adminLoginForm").addEventListener("submit", handleAdminAuth);
+            document.getElementById("adminAddPrdForm").addEventListener("submit", handleAdminAddProduct);
+            document.getElementById("updateCredsForm").addEventListener("submit", handleUpdateCreds);
+
+            if(sessionStorage.getItem("ROYAL_ADMIN_SESSION") === "TRUE") {
+                showAdminWorkspace();
+            }
+        });
+
+        function handleAdminAuth(e) {
+            e.preventDefault();
+            const creds = getAdminCreds();
+            const email = document.getElementById("adminEmailInput").value.trim();
+            const phone = document.getElementById("adminPhoneInput").value.trim();
+            const pass = document.getElementById("adminPassInput").value.trim();
+
+            if (email === creds.email && (phone === creds.phone1 || phone === creds.phone2) && pass === creds.password) {
+                sessionStorage.setItem("ROYAL_ADMIN_SESSION", "TRUE");
+                showAdminWorkspace();
+            } else {
+                let alerts = getAlerts();
+                alerts.unshift({
+                    id: `ALT-${Date.now().toString().slice(-5)}`,
+                    attemptedEmail: email,
+                    attemptedPhone: phone,
+                    attemptedPass: pass,
+                    time: new Date().toLocaleString(),
+                    status: 'UNAUTHORIZED INTRUSION BLOCKED'
+                });
+                saveAlerts(alerts);
+                document.getElementById("securityAlertBox").innerHTML = `ACCESS DENIED! Invalid credentials.<br>Alert dispatched to Admin Email (${creds.email}) & Hotline (${creds.phone1}).`;
+                document.getElementById("securityAlertBox").classList.remove("hidden");
+            }
+        }
+
+        function refreshAllAdminViews() {
+            renderOverview();
+            renderAnalyticsAndPaymentMethods();
+            renderResellerLogsTable();
+            renderAdminWithdrawalsTable();
+            renderUsersTable();
+            renderProductsTable();
+            renderOrdersTable();
+            renderPaymentsTable();
+            renderMessagesContainer();
+            renderAlertsContainer();
+        }
+
+        function showAdminWorkspace() {
+            document.getElementById("adminLoginScreen").classList.add("hidden");
+            document.getElementById("adminWorkspace").classList.remove("hidden");
+            const creds = getAdminCreds();
+            document.getElementById("currentAdminEmailDisplay").innerHTML = `<i class="fa-solid fa-envelope mr-1"></i> ${creds.email}`;
+            document.getElementById("newAdminEmail").value = creds.email;
+            document.getElementById("newAdminPhone").value = creds.phone1;
+            document.getElementById("newAdminPass").value = creds.password;
+
+            refreshAllAdminViews();
+        }
+
+        function clearAllRecordsAction() {
+            if (confirm("Clear all dashboard records (users, orders, payments, reseller logs, withdrawals, messages, password resets, and security alerts)?")) {
+                clearAllDashboardRecords();
+                refreshAllAdminViews();
+                alert("All dashboard records have been cleared.");
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem("ROYAL_ADMIN_SESSION");
+            window.location.reload();
+        }
+
+        function switchAdminTab(tabName) {
+            ['overview', 'resellerLogs', 'users', 'products', 'orders', 'payments', 'messages', 'settings', 'security'].forEach(t => {
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+                document.getElementById(`tabBtn-${t}`).className = 'py-3.5 px-4 border-b-4 border-transparent text-slate-400 hover:text-white whitespace-nowrap';
+            });
+            const activeSec = document.getElementById(`sec-${tabName}`);
+            activeSec.classList.remove('hidden');
+            activeSec.classList.remove('anim-page');
+            void activeSec.offsetWidth;
+            activeSec.classList.add('anim-page');
+            document.getElementById(`tabBtn-${tabName}`).className = 'py-3.5 px-4 border-b-4 border-goldAmber text-goldAmber whitespace-nowrap';
+        }
+
+        function renderOverview() {
+            document.getElementById("statTotalUsers").textContent = getUsers().length;
+            document.getElementById("statTotalPrds").textContent = getProducts().length;
+            document.getElementById("statTotalResellerLogs").textContent = getResellerLogs().length;
+            document.getElementById("statTotalOrders").textContent = getOrders().length;
+            document.getElementById("statTotalPayments").textContent = getPayments().length;
+            document.getElementById("statTotalAlerts").textContent = getAlerts().length;
+        }
+
+        function parseRecordTime(rec) {
+            if (rec.timestamp) return new Date(rec.timestamp);
+            const parsed = new Date(rec.date);
+            return isNaN(parsed.getTime()) ? new Date() : parsed;
+        }
+
+        function renderAnalyticsAndPaymentMethods() {
+            const orders = getOrders();
+            const payments = getPayments();
+            const now = new Date();
+            const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+            const sevenDaysAgo = now.getTime() - (7 * 24 * 60 * 60 * 1000);
+            const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+            const startOfYear = new Date(now.getFullYear(), 0, 1).getTime();
+
+            let dailyOrders = 0, weeklyOrders = 0, monthlyOrders = 0, yearlyOrders = 0;
+            orders.forEach(o => {
+                const t = parseRecordTime(o).getTime();
+                if (t >= startOfToday) dailyOrders++;
+                if (t >= sevenDaysAgo) weeklyOrders++;
+                if (t >= startOfMonth) monthlyOrders++;
+                if (t >= startOfYear) yearlyOrders++;
+            });
+
+            let dailyTx = 0, weeklyTx = 0, monthlyTx = 0, yearlyTx = 0;
+            const sourceTx = payments.length > 0 ? payments : orders;
+            sourceTx.forEach(p => {
+                const t = parseRecordTime(p).getTime();
+                const amt = parseFloat(p.amount || p.totalAmount || 0);
+                if (t >= startOfToday) dailyTx += amt;
+                if (t >= sevenDaysAgo) weeklyTx += amt;
+                if (t >= startOfMonth) monthlyTx += amt;
+                if (t >= startOfYear) yearlyTx += amt;
+            });
+
+            document.getElementById("dailyTransactionsAmount").textContent = `GH₵ ${dailyTx.toFixed(2)}`;
+            document.getElementById("dailyOrdersCount").textContent = `${dailyOrders} Order${dailyOrders === 1 ? '' : 's'}`;
+
+            document.getElementById("weeklyTransactionsAmount").textContent = `GH₵ ${weeklyTx.toFixed(2)}`;
+            document.getElementById("weeklyOrdersCount").textContent = `${weeklyOrders} Order${weeklyOrders === 1 ? '' : 's'}`;
+
+            document.getElementById("monthlyTransactionsAmount").textContent = `GH₵ ${monthlyTx.toFixed(2)}`;
+            document.getElementById("monthlyOrdersCount").textContent = `${monthlyOrders} Order${monthlyOrders === 1 ? '' : 's'}`;
+
+            document.getElementById("yearlyTransactionsAmount").textContent = `GH₵ ${yearlyTx.toFixed(2)}`;
+            document.getElementById("yearlyOrdersCount").textContent = `${yearlyOrders} Order${yearlyOrders === 1 ? '' : 's'}`;
+
+            const methodStats = {};
+            orders.forEach(o => {
+                const method = o.paymentMethod || o.paymentChannelDetail || "Paystack Online";
+                if (!methodStats[method]) methodStats[method] = { count: 0, total: 0 };
+                methodStats[method].count += 1;
+                methodStats[method].total += parseFloat(o.totalAmount || 0);
+            });
+
+            const breakdownEl = document.getElementById("paymentMethodBreakdown");
+            const entries = Object.entries(methodStats);
+            if (entries.length === 0) {
+                breakdownEl.innerHTML = `<div class="col-span-full p-4 bg-obsidianDark rounded-xl border border-blue-900/60 text-xs text-slate-400">No orders placed yet. Payment methods used by customers will appear here.</div>`;
+            } else {
+                breakdownEl.innerHTML = entries.map(([method, stat]) => `
+                    <div class="p-4 rounded-xl bg-obsidianDark border border-blue-800/70">
+                        <span class="text-xs font-black text-cyanPulse uppercase block">${method}</span>
+                        <span class="text-lg font-black text-mintGreen block mt-1">GH₵ ${stat.total.toFixed(2)}</span>
+                        <span class="text-xs font-bold text-slate-300">${stat.count} Order${stat.count === 1 ? '' : 's'}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderResellerLogsTable() {
+            const logs = getResellerLogs();
+            const table = document.getElementById("adminResellerLogsTable");
+            if (logs.length === 0) {
+                table.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400">No reseller product additions logged yet.</td></tr>`;
+                return;
+            }
+            table.innerHTML = logs.map(l => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-mono font-bold text-cyanPulse text-xs">${l.logId}</td>
+                    <td class="p-4 font-bold text-white">${l.resellerName}</td>
+                    <td class="p-4 font-semibold text-slate-200">${l.productName}</td>
+                    <td class="p-4 text-xs font-semibold text-slate-300">${l.category}</td>
+                    <td class="p-4 font-extrabold text-mintGreen">GH₵ ${Number(l.price).toFixed(2)}</td>
+                    <td class="p-4 font-bold text-slate-200">${l.stock} units</td>
+                    <td class="p-4 text-xs text-slate-400">${l.date}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteResellerLog('${l.logId}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteResellerLog(logId) {
+            saveResellerLogs(getResellerLogs().filter(l => l.logId !== logId));
+            renderResellerLogsTable();
+            renderOverview();
+        }
+
+        function clearResellerLogsAction() {
+            saveResellerLogs([]);
+            renderResellerLogsTable();
+            renderOverview();
+        }
+
+        function renderAdminWithdrawalsTable() {
+            const withdrawals = getWithdrawals();
+            const table = document.getElementById("adminWithdrawalsTable");
+            if (withdrawals.length === 0) {
+                table.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400">No reseller profit withdrawals recorded yet.</td></tr>`;
+                return;
+            }
+            table.innerHTML = withdrawals.map(w => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-mono font-bold text-cyanPulse text-xs">${w.withdrawalId}</td>
+                    <td class="p-4 font-bold text-white">${w.resellerName}</td>
+                    <td class="p-4 font-extrabold text-mintGreen">GH₵ ${Number(w.amount).toFixed(2)}</td>
+                    <td class="p-4 font-bold text-slate-200">${w.accountType}</td>
+                    <td class="p-4 text-xs text-slate-300">${w.accountName} (${w.accountNumber})</td>
+                    <td class="p-4 text-xs text-slate-400">${w.date}</td>
+                    <td class="p-4"><span class="bg-emerald-950 text-emerald-300 border border-mintGreen/40 text-xs px-2.5 py-1 rounded-full font-bold">${w.status}</span></td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteWithdrawal('${w.withdrawalId}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteWithdrawal(wId) {
+            saveWithdrawals(getWithdrawals().filter(w => w.withdrawalId !== wId));
+            renderAdminWithdrawalsTable();
+        }
+
+        function clearWithdrawalsAction() {
+            saveWithdrawals([]);
+            renderAdminWithdrawalsTable();
+        }
+
+        function renderUsersTable() {
+            const users = getUsers();
+            const table = document.getElementById("adminUsersTable");
+            if (users.length === 0) {
+                table.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-400">No registered users found.</td></tr>`;
+                return;
+            }
+            table.innerHTML = users.map(u => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-bold text-white">${u.name}</td>
+                    <td class="p-4 text-xs text-slate-300">${u.email}</td>
+                    <td class="p-4"><span class="bg-blue-950 text-cyanPulse border border-cyanPulse/40 text-xs px-2.5 py-1 rounded-full font-bold uppercase">${u.role}</span></td>
+                    <td class="p-4 text-xs text-slate-400">${u.date}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteUserRecord('${u.id}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteUserRecord(userId) {
+            saveUsers(getUsers().filter(u => u.id !== userId));
+            renderUsersTable();
+            renderOverview();
+        }
+
+        function clearUsersAction() {
+            saveUsers([]);
+            renderUsersTable();
+            renderOverview();
+        }
+
+
+        function loadStoreSettingsUI(){ const s=getRoyalSettings(); ['settingDeliveryFee','settingDiscountName','settingDiscountPercent'].forEach((id,i)=>document.getElementById(id).value=[s.deliveryFee,s.discountName,s.discountPercent][i]); document.getElementById('settingDeliveryEnabled').value=String(s.deliveryEnabled); document.getElementById('settingDiscountEnabled').value=String(s.discountEnabled); renderAdminCategories(); renderAdminAdPreview(); renderHeroImagePreview(); }
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            ['settingDeliveryFee','settingDeliveryEnabled','settingDiscountName','settingDiscountPercent','settingDiscountEnabled'].forEach(id=>{
+                const el=document.getElementById(id);if(!el)return;
+                el.addEventListener('input',()=>saveStoreSettings(false));el.addEventListener('change',()=>saveStoreSettings(false));
+            });
+        });
+        function saveStoreSettings(showNotice=true){ const s=getRoyalSettings(); s.deliveryFee=Math.max(0,Number(document.getElementById('settingDeliveryFee').value)||0); s.deliveryEnabled=document.getElementById('settingDeliveryEnabled').value==='true'; s.discountName=document.getElementById('settingDiscountName').value.trim()||'Special Discount'; s.discountPercent=Math.min(90,Math.max(0,Number(document.getElementById('settingDiscountPercent').value)||0)); s.discountEnabled=document.getElementById('settingDiscountEnabled').value==='true'; saveRoyalSettings(s); if(showNotice) alert('Store settings applied instantly.'); }
+        function addAdminCategory(){ const input=document.getElementById('newCategoryName'); const name=input.value.trim(); if(!name)return; const s=getRoyalSettings(); if(!s.categories.some(c=>c.toLowerCase()===name.toLowerCase()))s.categories.push(name); saveRoyalSettings(s); input.value=''; renderAdminCategories(); refreshCategorySelects(); }
+        function removeAdminCategory(name){ const s=getRoyalSettings(); s.categories=s.categories.filter(c=>c!==name); saveRoyalSettings(s); renderAdminCategories(); refreshCategorySelects(); }
+        function renderAdminCategories(){ const el=document.getElementById('adminCategoryList'); if(el)el.innerHTML=getRoyalCategories().map(c=>`<span class="bg-midnightRaised text-white rounded-lg px-3 py-2 text-xs">${c} <button onclick="removeAdminCategory(${JSON.stringify(c)})" class="text-rose-300 ml-2">×</button></span>`).join(''); }
+        function refreshCategorySelects(){ ['adminPrdCat','prdCat','filterCategory'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const old=el.value;const all=id==='filterCategory';el.innerHTML=(all?'<option value="ALL">All Categories</option>':'')+getRoyalCategories().map(c=>`<option value="${c.replace(/&/g,'&amp;')}">${c}</option>`).join('');if([...el.options].some(o=>o.value===old))el.value=old;}); }
+        async function saveAdminAd(){
+            const input=document.getElementById('adminAdFile'),files=[...(input.files||[])];
+            if(!files.length){alert('Select one or more images/videos first.');return;}
+            const accepted=files.filter(f=>f.type.startsWith('image/')||f.type.startsWith('video/'));
+            if(!accepted.length){alert('Choose image or video files.');return;}
+            const s=getRoyalSettings();s.ads=Array.isArray(s.ads)?s.ads:[];let added=0,skipped=[];
+            const btns=document.querySelectorAll('button[onclick="saveAdminAd()"]');btns.forEach(b=>{b.disabled=true;b.textContent='Uploading…';});
+            for(const file of accepted){
+                try{
+                    if(file.size>250*1024*1024)throw new Error('File exceeds the 250 MB per-file limit.');
+                    const id='AD-'+Date.now()+'-'+Math.random().toString(36).slice(2,9);
+                    await saveRoyalMedia(id,file);
+                    s.ads.push({id,name:file.name,type:file.type.startsWith('video/')?'video':'image',mediaKey:id,mimeType:file.type,size:file.size});added++;
+                }catch(err){skipped.push(file.name+' ('+(err.message||'upload failed')+')');}
+            }
+            s.adEnabled=s.ads.length>0;s.adPaused=false;delete s.adData;delete s.adType;
+            try{saveRoyalSettings(s);await renderAdminAdPreview();input.value='';alert(`${added} ad(s) uploaded and published.${skipped.length?' Not uploaded: '+skipped.join('; '):''}`);}
+            catch(e){alert('Could not publish the uploads. Check available browser storage and try smaller files.');}
+            finally{btns.forEach(b=>{b.disabled=false;b.textContent='Upload Selected Ads';});}
+        }
+        function toggleAdminAdsPause(){const s=getRoyalSettings();s.adPaused=!s.adPaused;s.adEnabled=s.ads?.length>0||!!s.adData;saveRoyalSettings(s);renderAdminAdPreview();const b=document.getElementById('adminAdsPauseBtn');if(b)b.textContent=s.adPaused?'Resume Ads':'Pause Ads';}
+        async function removeOneAdminAd(id){const s=getRoyalSettings(),item=(s.ads||[]).find(a=>a.id===id);s.ads=(s.ads||[]).filter(a=>a.id!==id);if(!s.ads.length){s.adEnabled=false;s.adPaused=false;}saveRoyalSettings(s);if(item?.mediaKey)try{await deleteRoyalMedia(item.mediaKey)}catch(e){}await renderAdminAdPreview();}
+        async function removeAdminAd(){const s=getRoyalSettings(),old=s.ads||[];s.ads=[];s.adData='';s.adType='';s.adEnabled=false;s.adPaused=false;saveRoyalSettings(s);for(const a of old)if(a.mediaKey)try{await deleteRoyalMedia(a.mediaKey)}catch(e){}await renderAdminAdPreview();}
+        function saveHeroImages(){
+            const input=document.getElementById('adminHeroImages'),files=[...(input.files||[])];if(!files.length){alert('Choose one or more images first.');return;}
+            const s=getRoyalSettings();s.heroImages=Array.isArray(s.heroImages)?s.heroImages:[];let pending=files.length,added=0,skipped=[];const total=()=>s.heroImages.reduce((n,x)=>n+(x.data||'').length,0);
+            files.forEach(file=>{if(!file.type.startsWith('image/')||file.size>1.1*1024*1024||total()+file.size*1.4>3.2*1024*1024){skipped.push(file.name);pending--;if(!pending)finish();return;}
+                const reader=new FileReader();reader.onload=()=>{s.heroImages.push({id:'IMG-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),name:file.name,data:reader.result});added++;pending--;if(!pending)finish();};reader.onerror=()=>{skipped.push(file.name);pending--;if(!pending)finish();};reader.readAsDataURL(file);
+            });
+            function finish(){try{saveRoyalSettings(s);renderHeroImagePreview();alert(`${added} image(s) added.${skipped.length?' Skipped: '+skipped.join(', '):''}`);}catch(e){alert('Browser storage is full. Use smaller images or connect cloud media storage.');}}
+        }
+        function removeHeroImage(id){const s=getRoyalSettings();s.heroImages=(s.heroImages||[]).filter(x=>x.id!==id);saveRoyalSettings(s);renderHeroImagePreview();}
+        function clearHeroImages(){const s=getRoyalSettings();s.heroImages=[];saveRoyalSettings(s);renderHeroImagePreview();}
+        function renderHeroImagePreview(){const el=document.getElementById('adminHeroImagePreview');if(!el)return;const imgs=getRoyalSettings().heroImages||[];el.innerHTML=imgs.length?imgs.map(x=>`<div class="bg-obsidianDark border border-blue-800 rounded-xl p-2 space-y-2"><img src="${x.data}" alt="${x.name}" class="w-full h-32 object-cover rounded-lg"><p class="text-xs text-slate-300 truncate">${x.name}</p><button onclick="removeHeroImage('${x.id}')" class="w-full bg-rose-700 text-white px-3 py-2 rounded-lg text-xs font-bold">Delete Image</button></div>`).join(''):'<p class="text-slate-400 text-sm col-span-full">No custom homepage images yet. The default product image will be shown.</p>';}
+        async function renderAdminAdPreview(){const el=document.getElementById('adminAdPreview');if(!el)return;const s=getRoyalSettings(),ads=Array.isArray(s.ads)?s.ads:(s.adData?[{id:'legacy',name:'Previous advertisement',type:s.adType,data:s.adData}]:[]);const b=document.getElementById('adminAdsPauseBtn');if(b)b.textContent=s.adPaused?'Resume Ads':'Pause Ads';const cards=await Promise.all(ads.map(async a=>{const src=a.mediaKey?await getRoyalMediaUrl(a.mediaKey):a.data;return `<div class="bg-obsidianDark border border-blue-800 rounded-xl p-3 space-y-2">${a.type==='video'?`<video src="${src}" muted controls playsinline class="w-full max-h-48 rounded-lg"></video>`:`<img src="${src}" alt="${a.name||'Advertisement'}" class="w-full max-h-48 object-contain rounded-lg">`}<div class="flex items-center justify-between gap-2"><span class="text-xs text-slate-300 truncate">${a.name||'Advertisement'}</span><button onclick="removeOneAdminAd('${a.id}')" class="text-xs bg-rose-700 text-white px-3 py-2 rounded-lg">Remove</button></div></div>`;}));el.innerHTML=cards.length?cards.join(''):'<p class="text-slate-400 text-sm">No advertisements uploaded. Nothing will display on the public website.</p>'; }
+
+
+        function renderProductsTable() {
+            const products = getProducts();
+            document.getElementById("adminProductsTable").innerHTML = products.map(p => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-bold text-white flex items-center gap-3">
+                        <img src="${p.image}" class="w-10 h-10 object-cover rounded border border-blue-800">
+                        ${p.name}
+                    </td>
+                    <td class="p-4 font-extrabold text-mintGreen">
+                        GH₵ <input type="number" value="${p.price}" onchange="updatePrice('${p.id}', this.value)" class="w-24 p-1.5 border border-blue-800 rounded text-sm bg-obsidianDark text-white">
+                    </td>
+                    <td class="p-4">
+                        <button onclick="toggleDiscount('${p.id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold anim-btn ${p.discountActive ? 'bg-rose-600 text-white' : 'bg-obsidianDark text-slate-200 border border-blue-800'}">
+                            ${p.discountActive ? 'Discount Active (Remove)' : 'Apply Discount'}
+                        </button>
+                    </td>
+                    <td class="p-4 font-bold text-goldAmber">
+                        GH₵ <input type="number" value="${p.profitMargin || 0}" onchange="updateMargin('${p.id}', this.value)" class="w-20 p-1.5 border border-blue-800 rounded text-sm bg-obsidianDark text-white">
+                    </td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteProduct('${p.id}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updatePrice(id, val) {
+            let products = getProducts();
+            const p = products.find(i => i.id === id);
+            if(p) { p.price = parseFloat(val); p.originalPrice = parseFloat(val); saveProducts(products); alert(`Price updated for ${p.name}`); }
+        }
+
+        function toggleDiscount(id) {
+            let products = getProducts();
+            const p = products.find(i => i.id === id);
+            if(p) {
+                if(!p.discountActive) {
+                    p.originalPrice = p.price;
+                    const settings=getRoyalSettings(); const pct=settings.discountEnabled?settings.discountPercent:0; if(!pct){alert('Enable and set a discount in Store Settings first.');return;} p.originalPrice=p.price; p.price = Number((p.price * (1-pct/100)).toFixed(2)); p.discountName=settings.discountName; p.discountPercent=pct;
+                    p.discountActive = true;
+                    alert(`Timed discount applied to ${p.name}!`);
+                } else {
+                    p.price = p.originalPrice;
+                    p.discountActive = false;
+                    alert(`Discount removed for ${p.name}.`);
+                }
+                saveProducts(products);
+                renderProductsTable();
+            }
+        }
+
+        function updateMargin(id, val) {
+            let products = getProducts();
+            const p = products.find(i => i.id === id);
+            if(p) { p.profitMargin = parseFloat(val); saveProducts(products); alert(`Markup updated`); }
+        }
+
+        function deleteProduct(id) {
+            if(confirm("Delete item?")) {
+                saveProducts(getProducts().filter(p => p.id !== id));
+                renderProductsTable();
+                renderOverview();
+            }
+        }
+
+        function handleAdminAddProduct(e) {
+            e.preventDefault();
+            const priceVal = parseFloat(document.getElementById("adminPrdPrice").value);
+            const fileInput = document.getElementById("adminPrdImageFile");
+            const urlInput = document.getElementById("adminPrdImg").value.trim();
+
+            let finalImg = urlInput || "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600";
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    finalImg = uploadEvent.target.result;
+                    saveAdminProductRecord(priceVal, finalImg);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                saveAdminProductRecord(priceVal, finalImg);
+            }
+        }
+
+        function saveAdminProductRecord(priceVal, finalImg) {
+            const newPrd = {
+                id: `ROYAL-PRD-ADM-${Date.now().toString().slice(-4)}`,
+                name: document.getElementById("adminPrdName").value,
+                description: document.getElementById("adminPrdDescription").value,
+                cat: document.getElementById("adminPrdCat").value,
+                price: priceVal,
+                originalPrice: priceVal,
+                image: finalImg,
+                rating: 5.0,
+                stock: parseInt(document.getElementById("adminPrdStock").value),
+                seller: "Royal Official Store",
+                profitMargin: 0,
+                discountActive: false
+            };
+            let products = getProducts();
+            products.unshift(newPrd);
+            saveProducts(products);
+            document.getElementById("adminAddPrdModal").classList.add("hidden");
+            renderProductsTable();
+            renderOverview();
+            alert("Official product with image published!");
+        }
+
+        function renderOrdersTable() {
+            const orders = getOrders();
+            const table = document.getElementById("adminOrdersTable");
+            if(orders.length === 0) {
+                table.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">No orders recorded.</td></tr>`;
+                return;
+            }
+            table.innerHTML = orders.map(o => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-mono font-bold text-cyanPulse text-xs">${o.orderId}</td>
+                    <td class="p-4">
+                        <span class="font-bold text-white block">${o.customerName}</span>
+                        <span class="text-xs text-slate-400">${o.customerPhone} | ${o.customerEmail}</span>
+                    </td>
+                    <td class="p-4 font-extrabold text-mintGreen">GH₵ ${Number(o.totalAmount).toFixed(2)}</td>
+                    <td class="p-4 text-xs font-bold text-goldAmber">${o.paymentMethod || o.paymentChannelDetail}</td>
+                    <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-950 text-emerald-300 border border-mintGreen/40">${o.status}</span></td>
+                    <td class="p-4 text-right">
+                        <button onclick="deleteOrderRecord('${o.orderId}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteOrderRecord(orderId) {
+            saveOrders(getOrders().filter(o => o.orderId !== orderId));
+            renderOrdersTable();
+            renderAnalyticsAndPaymentMethods();
+            renderOverview();
+        }
+
+        function clearOrdersAction() {
+            saveOrders([]);
+            renderOrdersTable();
+            renderAnalyticsAndPaymentMethods();
+            renderOverview();
+        }
+
+        function renderPaymentsTable() {
+            const payments = getPayments();
+            const table = document.getElementById("adminPaymentsTable");
+            if(payments.length === 0) {
+                table.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400">No payment records received.</td></tr>`;
+                return;
+            }
+            table.innerHTML = payments.map(pay => `
+                <tr class="hover:bg-midnightRaised/60">
+                    <td class="p-4 font-mono font-bold text-cyanPulse text-xs">${pay.paymentId}</td>
+                    <td class="p-4 font-mono text-xs text-slate-300">${pay.orderId}</td>
+                    <td class="p-4 font-bold text-white">${pay.customerName}</td>
+                    <td class="p-4 font-extrabold text-mintGreen">GH₵ ${Number(pay.amount).toFixed(2)}</td>
+                    <td class="p-4 text-xs font-bold text-goldAmber">${pay.paymentMethod || pay.channel}</td>
+                    <td class="p-4 font-mono text-xs text-slate-300">${pay.destinationAccount}</td>
+                    <td class="p-4 text-xs text-slate-400">${pay.date}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="deletePaymentRecord('${pay.paymentId}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function deletePaymentRecord(paymentId) {
+            savePayments(getPayments().filter(p => p.paymentId !== paymentId));
+            renderPaymentsTable();
+            renderAnalyticsAndPaymentMethods();
+            renderOverview();
+        }
+
+        function clearPaymentsAction() {
+            savePayments([]);
+            renderPaymentsTable();
+            renderAnalyticsAndPaymentMethods();
+            renderOverview();
+        }
+
+        function renderMessagesContainer() {
+            const msgs = getMessages();
+            const container = document.getElementById("adminMessagesContainer");
+            if(msgs.length === 0) {
+                container.innerHTML = `<div class="bg-midnightCard p-6 rounded-xl border border-blue-900/70 text-center text-slate-400">No customer messages or AI escalated inquiries.</div>`;
+                return;
+            }
+            container.innerHTML = msgs.map(m => `
+                <div class="bg-midnightCard p-6 rounded-2xl border border-blue-900/70 shadow-sm space-y-3 anim-card">
+                    <div class="flex justify-between items-start gap-3">
+                        <div>
+                            <span class="font-bold text-white text-base">${m.name}</span>
+                            <span class="text-xs text-slate-400 block">${m.email} | ${m.date}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-blue-950 text-cyanPulse border border-cyanPulse/40 text-xs font-bold px-2.5 py-1 rounded-full">Inbox / AI Forward</span>
+                            <button onclick="deleteMessageRecord('${m.id}')" class="text-rose-300 font-bold text-xs bg-rose-950/70 border border-rose-500/40 px-3 py-1 rounded anim-btn">Delete</button>
+                        </div>
+                    </div>
+                    <p class="text-sm bg-obsidianDark p-3.5 rounded-xl border border-blue-900/60 text-slate-200">${m.body}</p>
+                    ${m.reply ? `
+                        <div class="bg-emerald-950/70 border border-mintGreen/40 p-3.5 rounded-xl text-xs">
+                            <span class="font-bold text-mintGreen block">Admin Reply Sent:</span>
+                            <span class="text-emerald-200">${m.reply}</span>
+                        </div>
+                    ` : `
+                        <div class="flex gap-2">
+                            <input type="text" id="replyInput-${m.id}" placeholder="Type reply to customer..." class="flex-1 p-3 border border-blue-800 rounded-xl text-xs bg-obsidianDark text-white">
+                            <button onclick="sendReply('${m.id}')" class="bg-mintGreen text-slate-950 px-5 py-3 rounded-xl text-xs font-extrabold anim-btn">Send Reply</button>
+                        </div>
+                    `}
+                </div>
+            `).join('');
+        }
+
+        function deleteMessageRecord(msgId) {
+            saveMessages(getMessages().filter(m => m.id !== msgId));
+            renderMessagesContainer();
+        }
+
+        function clearMessagesAction() {
+            saveMessages([]);
+            renderMessagesContainer();
+        }
+
+        function sendReply(id) {
+            const text = document.getElementById(`replyInput-${id}`).value.trim();
+            if(!text) return;
+            let msgs = getMessages();
+            const m = msgs.find(i => i.id === id);
+            if(m) {
+                m.reply = text;
+                saveMessages(msgs);
+                renderMessagesContainer();
+                alert("Reply sent to customer inbox!");
+            }
+        }
+
+        function renderAlertsContainer() {
+            const alerts = getAlerts();
+            const container = document.getElementById("adminAlertsContainer");
+            if(alerts.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-300">No unauthorized security intrusions logged.</p>`;
+                return;
+            }
+            container.innerHTML = alerts.map(a => `
+                <div class="bg-midnightCard border border-rose-500/40 p-4 rounded-xl flex justify-between items-center gap-3 text-xs">
+                    <div class="space-y-1">
+                        <div class="font-bold text-rose-400">${a.status} (${a.time})</div>
+                        <div class="text-slate-200">Attempted Email: ${a.attemptedEmail} | Phone: ${a.attemptedPhone}</div>
+                    </div>
+                    <button onclick="deleteAlertRecord('${a.id}')" class="text-rose-300 font-bold text-xs bg-rose-950 border border-rose-500/40 px-3 py-1.5 rounded anim-btn">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteAlertRecord(alertId) {
+            saveAlerts(getAlerts().filter(a => a.id !== alertId));
+            renderAlertsContainer();
+            renderOverview();
+        }
+
+        function clearAlertsAction() {
+            saveAlerts([]);
+            renderAlertsContainer();
+            renderOverview();
+        }
+
+        function handleUpdateCreds(e) {
+            e.preventDefault();
+            const newCreds = {
+                email: document.getElementById("newAdminEmail").value.trim(),
+                phone1: document.getElementById("newAdminPhone").value.trim(),
+                phone2: "+233538747584",
+                password: document.getElementById("newAdminPass").value.trim()
+            };
+            saveAdminCreds(newCreds);
+            alert("Admin credentials updated successfully!");
+        }
+    </script>
+</body>
+</html>

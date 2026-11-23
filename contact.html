@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#101d3b">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Contact &amp; Customer Support | ROYAL EXPRESS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royalBlue: '#1E3A8A',
+                        mintGreen: '#10B981',
+                        goldAmber: '#F59E0B',
+                        obsidianDark: '#070D1F',
+                        midnightCard: '#0F1B38',
+                        midnightRaised: '#16264D',
+                        cyanPulse: '#38BDF8',
+                        slateMist: '#CBD5E1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pageFadeUp {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.35); }
+            50% { box-shadow: 0 0 22px 4px rgba(245, 158, 11, 0.25); }
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-7px); }
+        }
+        @keyframes barSweep {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .anim-page {
+            animation: pageFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .anim-card {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+        .anim-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 34px -12px rgba(2, 6, 23, 0.75);
+        }
+        .anim-btn {
+            transition: transform 0.18s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+        .anim-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06);
+        }
+        .anim-btn:active {
+            transform: translateY(0px) scale(0.98);
+        }
+        .anim-float {
+            animation: floatSlow 3.6s ease-in-out infinite;
+        }
+        .anim-glow {
+            animation: pulseGlow 2.8s infinite;
+        }
+        .anim-gradient-bar {
+            background-size: 200% 200%;
+            animation: barSweep 7s ease infinite;
+        }
+        input, select, textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+    
+        /* ROYAL EXPRESS motion system */
+        @keyframes royalReveal{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes royalShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        body{scroll-behavior:smooth}
+        main,section,header,footer{animation:royalReveal .65s ease both}
+        button,a,[role="button"]{transition:transform .22s ease,filter .22s ease,box-shadow .22s ease}
+        button:hover,a:hover,[role="button"]:hover{filter:brightness(1.08)}
+        button:active,a:active{transform:scale(.975)}
+        img,video{transition:transform .35s ease,filter .35s ease}
+        .anim-card:hover img{transform:scale(1.035)}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+    </style>
+
+<style id="royal-mobile-responsive">
+
+/* ROYAL EXPRESS mobile-first usability layer */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{width:100%;max-width:100%;overflow-x:hidden;margin:0;min-height:100vh}
+img,video,canvas,svg{max-width:100%;height:auto}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+input,select,textarea{max-width:100%;min-width:0}
+:focus-visible{outline:3px solid rgba(245,158,11,.75);outline-offset:2px}
+.mobile-bottom-nav{display:none}
+@media(max-width:768px){
+ body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ main{width:100%;max-width:100%;padding-left:16px!important;padding-right:16px!important;padding-top:24px!important;padding-bottom:28px!important}
+ nav{max-width:100%;}
+ nav>div{max-width:100%;flex-wrap:wrap;gap:10px!important;padding-left:14px!important;padding-right:14px!important}
+ nav a{white-space:normal}
+ nav .flex.items-center{gap:12px!important;flex-wrap:wrap}
+ nav .flex-1.max-w-2xl{order:3;flex:1 0 100%;max-width:100%}
+ nav form{width:100%;max-width:100%}
+ nav input[type=search],nav input[type=text]{min-width:0;width:100%}
+ nav .space-x-6>*+*,nav .space-x-5>*+*,nav .space-x-4>*+*{margin-left:0!important}
+ nav .flex.items-center.space-x-6,nav .flex.items-center.space-x-5{width:100%;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap;padding:4px 0 7px;scrollbar-width:thin}
+ nav .flex.items-center.space-x-6>a,nav .flex.items-center.space-x-5>a{flex:0 0 auto}
+ body>div.bg-gradient-to-r,body>div.bg-royalBlue{padding-left:14px!important;padding-right:14px!important;gap:8px;flex-wrap:wrap;font-size:11px!important}
+ h1{font-size:clamp(1.45rem,6vw,2rem)!important;line-height:1.2!important}
+ h2{line-height:1.25!important}
+ .text-4xl{font-size:1.9rem!important}.text-3xl{font-size:1.55rem!important}.text-2xl{font-size:1.3rem!important}
+ .p-10{padding:1.25rem!important}.p-8{padding:1.1rem!important}.p-7{padding:1rem!important}.p-6{padding:1rem!important}
+ .px-8,.px-7,.px-6{padding-left:1rem!important;padding-right:1rem!important}
+ .py-12,.py-10{padding-top:1.5rem!important;padding-bottom:1.5rem!important}
+ .gap-10{gap:1.25rem!important}.gap-8{gap:1rem!important}.gap-6{gap:.9rem!important}
+ .rounded-2xl{border-radius:1rem!important}
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;min-height:46px}
+ textarea{min-height:110px}
+ button,.btn,a[role=button]{min-height:42px}
+ .overflow-x-auto{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+ table{min-width:620px}
+ .modal,.fixed.inset-0{padding:12px!important;overflow-y:auto}
+ .modal>div,.fixed.inset-0>div{max-width:100%;max-height:calc(100dvh - 24px);overflow-y:auto}
+ #productGrid,#catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ #productGrid>*,#catalogGrid>*{min-width:0}
+ #productGrid img,#catalogGrid img{width:100%;object-fit:cover}
+ .mobile-bottom-nav{display:flex;position:fixed;z-index:1000;left:0;right:0;bottom:0;min-height:64px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(10,18,38,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,.35);justify-content:space-around;align-items:center;gap:4px;box-shadow:0 -8px 24px rgba(0,0,0,.22)}
+ .mobile-bottom-nav a{display:flex;flex:1;min-width:0;min-height:48px;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#cbd5e1;text-decoration:none;font-size:10px;font-weight:700;border-radius:12px;padding:4px 2px}
+ .mobile-bottom-nav a i{font-size:18px}
+ .mobile-bottom-nav a.active{color:#fbbf24;background:rgba(245,158,11,.10)}
+ .mobile-bottom-nav a:active{transform:scale(.96)}
+ footer{padding-bottom:82px!important}
+}
+@media(max-width:420px){
+ body{font-size:14px}
+ main{padding-left:12px!important;padding-right:12px!important}
+ #productGrid,#catalogGrid{gap:9px!important}
+ #productGrid .text-xl,#catalogGrid .text-xl{font-size:1rem!important}
+ #productGrid .text-2xl,#catalogGrid .text-2xl{font-size:1.1rem!important}
+ .mobile-bottom-nav a{font-size:9px}
+ .mobile-bottom-nav a i{font-size:17px}
+ .flex.gap-4{gap:9px!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+</style>
+    <link rel="stylesheet" href="royal-mobile-pro.css">
+</head>
+<body class="bg-gradient-to-br from-obsidianDark via-midnightCard to-slate-950 text-slate-100 min-h-screen flex flex-col anim-page">
+    <nav class="bg-midnightCard shadow-md py-3.5 px-6 flex justify-between items-center border-b border-blue-900/70">
+        <a href="index.html" class="bg-royalBlue text-white p-2.5 rounded-xl font-black text-2xl tracking-wider shadow border border-goldAmber/30">
+            ROYAL<span class="text-goldAmber">EXPRESS</span>
+        </a>
+        <div class="flex items-center space-x-5">
+            <a href="products.html" class="text-xs text-slateMist hover:text-goldAmber font-bold">Catalog</a>
+            <a href="login.html" class="text-xs text-slateMist hover:text-goldAmber font-bold">Sign In / Register</a>
+            <a href="index.html" class="text-xs text-cyanPulse font-bold">Return to Store</a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-black text-white">Customer Support Hub</h1>
+            <p class="text-slate-300 mt-2 text-sm">Send inquiries directly to the Royal Express Admin inbox.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-royalBlue text-white p-8 rounded-2xl shadow-xl space-y-6 border border-blue-700 anim-card">
+                <h2 class="text-2xl font-extrabold text-goldAmber">Official Contacts</h2>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-obsidianDark p-3 rounded-lg text-goldAmber"><i class="fa-solid fa-envelope text-xl"></i></div>
+                    <div>
+                        <span class="block text-xs text-blue-200 uppercase font-bold">Email</span>
+                        <a href="mailto:isaacbekoeasabre@gmail.com" class="font-bold text-white text-sm">isaacbekoeasabre@gmail.com</a>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-obsidianDark p-3 rounded-lg text-goldAmber"><i class="fa-solid fa-phone text-xl"></i></div>
+                    <div>
+                        <span class="block text-xs text-blue-200 uppercase font-bold">Hotline 1</span>
+                        <a href="tel:+233538287760" class="font-bold text-white text-sm">+233 538 287 760</a>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-obsidianDark p-3 rounded-lg text-goldAmber"><i class="fa-solid fa-phone text-xl"></i></div>
+                    <div>
+                        <span class="block text-xs text-blue-200 uppercase font-bold">Hotline 2</span>
+                        <a href="tel:+233538747584" class="font-bold text-white text-sm">+233 538 747 584</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-midnightCard p-8 rounded-2xl shadow-sm border border-blue-900/70 anim-card">
+                <h2 class="text-xl font-bold text-white mb-4">Send Message to Admin Inbox</h2>
+                <form id="contactForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-black text-slateMist uppercase mb-1">Your Name</label>
+                        <input type="text" id="msgName" required placeholder="Isaac Bekoe" class="w-full p-3 border border-blue-800 rounded-xl text-sm font-semibold bg-obsidianDark text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slateMist uppercase mb-1">Your Email</label>
+                        <input type="email" id="msgEmail" required placeholder="name@example.com" class="w-full p-3 border border-blue-800 rounded-xl text-sm font-semibold bg-obsidianDark text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slateMist uppercase mb-1">Message Content</label>
+                        <textarea id="msgBody" required rows="4" placeholder="Write your inquiry..." class="w-full p-3 border border-blue-800 rounded-xl text-sm font-semibold bg-obsidianDark text-white"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-mintGreen text-slate-950 font-extrabold py-3.5 rounded-xl shadow anim-btn">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app_state.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/email_service.js"></script>
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const name = document.getElementById("msgName").value.trim();
+            const email = document.getElementById("msgEmail").value.trim();
+            const body = document.getElementById("msgBody").value.trim();
+            const button = e.currentTarget.querySelector('button[type="submit"]');
+            const originalText = button.textContent.trim();
+            button.disabled = true; button.textContent = "Sending...";
+            try {
+                await sendRoyalEmail({
+                    toEmail: getAdminCreds().email,
+                    toName: 'ROYAL EXPRESS Admin',
+                    replyTo: email,
+                    subject: `ROYAL EXPRESS customer message from ${name}`,
+                    message: `Customer name: ${name}\nCustomer email: ${email}\n\nMessage:\n${body}`
+                });
+                const newMsg = { id: `MSG-${Date.now().toString().slice(-5)}`, name, email, body, date: new Date().toLocaleString(), reply: null };
+                let msgs = getMessages(); msgs.unshift(newMsg); saveMessages(msgs);
+                alert("Your message was sent successfully through EmailJS.");
+                document.getElementById("contactForm").reset();
+            } catch (err) {
+                console.error('EmailJS contact error:', err);
+                alert(`Message was not sent. ${err?.text || err?.message || 'Please check your EmailJS template settings and try again.'}`);
+            } finally {
+                button.disabled = false; button.textContent = originalText;
+            }
+        });
+    </script>
+<script id="royal-mobile-navigation">
+(function(){
+  if (window.matchMedia('(min-width: 769px)').matches || document.querySelector('.mobile-bottom-nav')) return;
+  const links=[
+    ['index.html','fa-house','Home'],
+    ['products.html','fa-store','Shop'],
+    ['cart.html','fa-cart-shopping','Cart'],
+    ['login.html','fa-user','Account'],
+    ['contact.html','fa-headset','Help']
+  ];
+  const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  const nav=document.createElement('nav'); nav.className='mobile-bottom-nav'; nav.setAttribute('aria-label','Mobile quick navigation');
+  links.forEach(([href,icon,label])=>{
+    const a=document.createElement('a');a.href=href;
+    if(current===href || (current==='checkout.html'&&href==='cart.html') || (current==='receipt.html'&&href==='cart.html'))a.classList.add('active');
+    const i=document.createElement('i');i.className='fa-solid '+icon;i.setAttribute('aria-hidden','true');
+    const span=document.createElement('span');span.textContent=label;
+    a.append(i,span);nav.append(a);
+  });
+  document.body.append(nav);
+})();
+</script>
+</body>
+</html>
