@@ -158,7 +158,7 @@ input,select,textarea{max-width:100%;min-width:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 </style>
-    <link rel="stylesheet" href="royal-mobile-pro.css">
+    <link rel="stylesheet" href="/royal-mobile-pro.css">
 </head>
 <body class="bg-gradient-to-br from-obsidianDark via-midnightCard to-slate-950 min-h-screen text-slate-100 anim-page">
 
@@ -595,27 +595,40 @@ input,select,textarea{max-width:100%;min-width:0}
         </div>
     </div>
 
-    <script src="js/app_state.js"></script>
+    <script src="/js/app_state.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            loadStoreSettingsUI(); refreshCategorySelects();
-            document.getElementById("adminLoginForm").addEventListener("submit", handleAdminAuth);
-            document.getElementById("adminAddPrdForm").addEventListener("submit", handleAdminAddProduct);
-            document.getElementById("updateCredsForm").addEventListener("submit", handleUpdateCreds);
+            const loginForm = document.getElementById("adminLoginForm");
+            const addProductForm = document.getElementById("adminAddPrdForm");
+            const updateCredsForm = document.getElementById("updateCredsForm");
+            if (loginForm) loginForm.addEventListener("submit", handleAdminAuth);
+            if (addProductForm) addProductForm.addEventListener("submit", handleAdminAddProduct);
+            if (updateCredsForm) updateCredsForm.addEventListener("submit", handleUpdateCreds);
 
-            if(sessionStorage.getItem("ROYAL_ADMIN_SESSION") === "TRUE") {
-                showAdminWorkspace();
+            try {
+                if (typeof getRoyalSettings !== "function") {
+                    throw new Error("js/app_state.js did not load. Check the published /js/app_state.js path.");
+                }
+                loadStoreSettingsUI();
+                refreshCategorySelects();
+                if (sessionStorage.getItem("ROYAL_ADMIN_SESSION") === "TRUE") showAdminWorkspace();
+            } catch (error) {
+                console.error("ROYAL EXPRESS admin initialization:", error);
+                const alertBox = document.getElementById("securityAlertBox");
+                if (alertBox) alertBox.textContent = "Admin settings could not load. Refresh the page; if this continues, check that /js/app_state.js is published.";
             }
         });
 
         function handleAdminAuth(e) {
             e.preventDefault();
             const creds = getAdminCreds();
-            const email = document.getElementById("adminEmailInput").value.trim();
-            const phone = document.getElementById("adminPhoneInput").value.trim();
-            const pass = document.getElementById("adminPassInput").value.trim();
+            const email = document.getElementById("adminEmailInput").value.trim().toLowerCase();
+            const phone = document.getElementById("adminPhoneInput").value.replace(/\\D/g, "");
+            const pass = document.getElementById("adminPassInput").value;
 
-            if (email === creds.email && (phone === creds.phone1 || phone === creds.phone2) && pass === creds.password) {
+            const savedEmail = String(creds.email || "").trim().toLowerCase();
+            const savedPhones = [creds.phone1, creds.phone2].map(value => String(value || "").replace(/\\D/g, ""));
+            if (email === savedEmail && savedPhones.includes(phone) && pass === creds.password) {
                 sessionStorage.setItem("ROYAL_ADMIN_SESSION", "TRUE");
                 showAdminWorkspace();
             } else {
@@ -624,7 +637,6 @@ input,select,textarea{max-width:100%;min-width:0}
                     id: `ALT-${Date.now().toString().slice(-5)}`,
                     attemptedEmail: email,
                     attemptedPhone: phone,
-                    attemptedPass: pass,
                     time: new Date().toLocaleString(),
                     status: 'UNAUTHORIZED INTRUSION BLOCKED'
                 });

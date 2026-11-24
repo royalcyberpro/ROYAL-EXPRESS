@@ -186,7 +186,7 @@ input,select,textarea{max-width:100%;min-width:0}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
 </style>
-    <link rel="stylesheet" href="royal-mobile-pro.css">
+    <link rel="stylesheet" href="/royal-mobile-pro.css">
 </head>
 <body class="bg-gradient-to-br from-obsidianDark via-royalBlue/40 to-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
     <div class="absolute -top-24 -left-24 w-80 h-80 bg-goldAmber/15 rounded-full blur-3xl pointer-events-none anim-float"></div>
@@ -287,9 +287,14 @@ input,select,textarea{max-width:100%;min-width:0}
         </div>
     </div>
 
-    <script src="js/app_state.js"></script>
-    <script src="js/email_service.js"></script>
+    <script src="/js/app_state.js"></script>
+    <script src="/js/email_service.js"></script>
     <script>
+        window.addEventListener("error", function (event) {
+            console.error("ROYAL EXPRESS page error:", event.message, event.filename, event.lineno);
+            const status = document.getElementById("emailDispatchStatus");
+            if (status && !status.textContent.trim()) status.textContent = "The registration page encountered a script error. Refresh the page and try again.";
+        });
         let pendingRegistration = null;
         let currentVerificationCode = ""; // Kept empty; verification is performed by the Cloudflare Worker.
 
