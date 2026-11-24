@@ -388,7 +388,7 @@ input,select,textarea{max-width:100%;min-width:0}
                 date: new Date().toLocaleString()
             };
 
-            document.getElementById("verifInstructionText").textContent = `A 6-digit verification code was sent to ${email}. Go to your email account, check for the code, and enter it below to complete registration.`;
+            document.getElementById("verifInstructionText").textContent = `We are requesting a 6-digit verification code for ${email}. When the request succeeds, check your Inbox and Spam folder, then enter the code below.`;
             document.getElementById("verifCodeInput").value = "";
             document.getElementById("verifErrorBox").classList.add("hidden");
 
@@ -400,12 +400,12 @@ input,select,textarea{max-width:100%;min-width:0}
             try {
                 await dispatchVerificationEmail(email, name);
             } catch (err) {
-                pendingRegistration = null;
-                document.getElementById("registerVerifyForm").classList.add("hidden");
-                document.getElementById("registerStep1Form").classList.remove("hidden");
                 const detail = String(err?.message || err || "Unknown email service error");
-                regErr.textContent = `Verification email failed: ${detail}. Check the Cloudflare Worker deployment, KV binding, and Brevo settings.`;
-                regErr.classList.remove("hidden");
+                const verifyError = document.getElementById("verifErrorBox");
+                verifyError.textContent = `We could not send the code yet: ${detail}. Use Resend Code to try again, or Edit Details to return to the form.`;
+                verifyError.classList.remove("hidden");
+                const status = document.getElementById("emailDispatchStatus");
+                if (status) status.textContent = "Email request failed. Your registration details are still here; you can retry.";
             }
         });
 

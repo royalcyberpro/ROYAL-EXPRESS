@@ -89,3 +89,10 @@ The registration and password-reset pages now call the Cloudflare Worker at:
 The Worker must have POST routes `/send-code` and `/verify-code`, a KV binding named `VERIFICATION_CODES`, and the required Brevo secrets/variables configured in Cloudflare. Do not put the Brevo API key in website files. Deploy this ZIP to GitHub Pages after confirming the Worker is deployed.
 
 **Important limitation:** this static website still stores customer accounts and passwords in each visitor's browser `localStorage`. Email-code verification is handled by the Worker, but login/account records are not stored in a shared server database. This is not a production-grade secure account system; a real launch should migrate accounts and authentication to a server-side auth/database service.
+
+
+## Published domain and registration troubleshooting
+
+The published website origin is `https://eroyalexpress.com`. The Cloudflare Worker CORS allow-list must include this exact origin. If the site redirects visitors to `https://www.eroyalexpress.com`, include that origin too. The frontend calls the Worker at `/send-code` and `/verify-code` on the Worker host.
+
+The registration page now keeps the verification panel and the pending form details visible if sending the email fails. It displays the actual error and allows a resend attempt instead of silently returning to the first form. A code can only be accepted after the Worker confirms it.
